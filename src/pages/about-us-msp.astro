@@ -1,0 +1,119 @@
+---
+// About — rebuild of Elementor page 2696. Body copy comes from the original widgets.
+import Base from '../layouts/Base.astro';
+import w from '../data/widgets/about-us-msp.json';
+
+const team = [
+  { photo: '/images/2024/04/Untitled-design-1.png', title: 'Managing Partner', bio: w['240baab'], cls: 'first' },
+  { photo: '/images/2024/04/Untitled-design.png', title: 'Chief Operating Officer', bio: w['42a526d'], cls: 'second' },
+];
+---
+<Base
+  title="About RiseOak"
+  description="Drive MSP growth with our digital marketing expertise. Over a decade of proven results working with top MSPs in the US. Learn more about our approach."
+  robots="nofollow, noindex"
+>
+  <section class="about-hero">
+    <div class="container">
+      <div class="col">
+        <div class="wrap center">
+          <div class="widget t-center"><h1 class="title">About RiseOak</h1></div>
+          <div class="widget t-center sub"><h2 class="title">We drive MSP growth through digital marketing. Our exclusive focus on MSPs and over a decade of proven results working with top MSPs in the US sets us apart.</h2></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-sec bg-tint mid flush">
+    <div class="container">
+      <div class="col">
+        <div class="wrap around">
+          <div class="widget"><h2 class="title h2-600">Mission</h2></div>
+          <div class="widget">
+            <div class="container">
+              <div class="col">
+                <div class="wrap" style="padding:0">
+                  <div class="widget rich" set:html={w['dbceda9']} />
+                  <div class="widget"><h2 class="title h2-600">Core Values</h2></div>
+                  <div class="widget rich core-values" set:html={w['25e1c10']} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-sec mid flush">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget"><h2 class="title h2-600">RiseOak: The Name's Meaning</h2></div>
+          <div class="widget">
+            <div class="container">
+              <div class="col oak-img">
+                <div class="wrap" style="padding:0">
+                  <div class="widget img-c"><img src="/images/2023/06/Oak-Tree-symbol-for-RiseOak.jpg" alt="" width="750" height="603" loading="lazy" /></div>
+                </div>
+              </div>
+              <div class="col oak-text">
+                <div class="wrap">
+                  <div class="widget rich" set:html={w['8f3c867']} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-sec bg-tint mid flush">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget"><h2 class="title h2-600">The RiseOak Community</h2></div>
+          <div class="widget rich" set:html={w['80c4cf5']} />
+          <div class="widget img-c"><img src="/images/2026/09/RiseOak-Community.jpg" alt="RiseOak Community" width="700" height="500" loading="lazy" /></div>
+          <div class="widget">
+            <div class="container">
+              <div class="col">
+                <div class="wrap" style="padding:0">
+                  <div class="widget rich" set:html={w['52f6e97']} />
+                  <div class="widget rich community-more" set:html={w['b678130']} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {team.map((m) => (
+    <section class={`about-sec team-sec ${m.cls} mid flush`}>
+      <div class="container">
+        <div class="col">
+          <div class="wrap">
+            <div class="widget">
+              <div class="container team-row">
+                <div class="col team-photo">
+                  <div class="wrap" style="padding:0">
+                    <div class="widget img-c"><img src={m.photo} alt="" width="500" height="500" loading="lazy" /></div>
+                  </div>
+                </div>
+                <div class="col team-bio">
+                  <div class="wrap">
+                    <div class="widget"><h2 class="title h2-600">{m.title}</h2></div>
+                    <div class="widget rich" set:html={m.bio} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+</Base>

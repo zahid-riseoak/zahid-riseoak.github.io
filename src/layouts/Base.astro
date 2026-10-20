@@ -1,0 +1,54 @@
+---
+import '@fontsource-variable/roboto';
+import '@fontsource-variable/roboto/wght-italic.css';
+import '@fontsource-variable/roboto-slab';
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import '@fortawesome/fontawesome-free/css/solid.min.css';
+import '@fortawesome/fontawesome-free/css/regular.min.css';
+import '../styles/global.css';
+import '../styles/pages.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Landing-page chrome (Elementor header 1906 / footer 1953): empty white bars, no menu. */
+  minimal?: boolean;
+  robots?: string;
+}
+const {
+  title,
+  description,
+  minimal = false,
+  robots = 'index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    <link rel="icon" href="/favicon.jpg" sizes="32x32" />
+    <link rel="icon" href="/favicon.jpg" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/favicon.jpg" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    {minimal ? <header class="lp-header" /> : <Header />}
+    <main id="content">
+      <slot />
+    </main>
+    {minimal ? <footer class="lp-footer" /> : <Footer />}
+  </body>
+</html>

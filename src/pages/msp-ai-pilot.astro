@@ -1,0 +1,170 @@
+---
+// MSP AI Pilot — rebuild of Elementor page 4645 (landing chrome, no header menu).
+import Base from '../layouts/Base.astro';
+import w from '../data/widgets/msp-ai-pilot.json';
+
+const logos = [
+  { src: '/images/2023/09/Untitled-design-7.png', alt: '' },
+  { src: '/images/2023/09/Untitled-design-5.png', alt: '' },
+  { src: '/images/2026/04/powersolution-logo-1-1.png', alt: '' },
+  { src: '/images/2023/09/Untitled-design-3.png', alt: '' },
+  { src: '/images/2024/06/Untitled-design-5.png', alt: 'CompassMSP logo' },
+  { src: '/images/2023/09/Untitled-design-6.png', alt: '' },
+];
+const people = [
+  { photo: '/images/2026/01/Peter-Jacobson.jpg', w: 1024, h: 1024, quote: w['2f25681'], name: 'Peter Jacobson', role: w['d57f4f8'] },
+  { photo: '/images/2026/06/Chuck-Tomlinson.jpg', w: 500, h: 500, quote: w['2d0cc36'], name: 'Chuck Tomlinson', role: w['fa894ac'] },
+];
+const faqs = [
+  { q: 'Why does this matter now?', a: 'Buyer research is shifting from Google to ChatGPT and other AI platforms. The MSPs that appear in AI-generated answers now will capture inbound leads for the next five years.' },
+  { q: 'What’s the catch?', a: 'This is how we earn the right to a conversation. About 1 in 4 MSPs we send this to ends up hiring us. The other 3 implement it themselves, and that’s fine.' },
+];
+---
+<Base
+  title="The MSP AI Visibility Roadmap"
+  description="Get your MSP in front of high-intent buyers on AI platforms. Discover your visibility, benchmark top competitors, and get a prioritized fix plan with expert guidance."
+  robots="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+  minimal
+>
+  <section class="pilot-hero">
+    <div class="container">
+      <div class="col">
+        <div class="wrap top">
+          <div class="widget">
+            <div class="container inner">
+              <div class="col">
+                <div class="wrap center" style="padding:0">
+                  <div class="widget t-center"><h1 class="title">Are You Losing High-Intent MSP Leads to AI Answers?</h1></div>
+                  <div class="widget t-center pilot-sub" set:html={w['a2227d8']} />
+                  <div class="widget t-center btn-w"><a class="btn btn-primary" href="#formSectn">Get My Pilot</a></div>
+                  <div class="widget t-center pilot-note" set:html={w['20289eb']} />
+                  <div class="widget t-center pilot-logos-h"><h3 class="title">Some MSPs We've Helped</h3></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="widget">
+            <div class="pilot-logos">
+              {logos.map((l) => <div><img src={l.src} alt={l.alt} width="400" height="300" loading="lazy" /></div>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pilot-get bg-tint">
+    <div class="container">
+      <div class="col">
+        <div class="wrap outer">
+          <div class="widget t-center"><h2 class="title sec-h2">What You'll Get in 14 Days</h2></div>
+          <div class="widget">
+            <div class="container pilot-get-inner">
+              <div class="col">
+                <div class="wrap center" style="align-items:center">
+                  <div class="widget pilot-list" style="width:auto" set:html={w['06d0ebf']} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pilot-proof">
+    <div class="container">
+      <div class="col">
+        <div class="wrap outer">
+          <div class="widget t-center"><h2 class="title sec-h2">Real MSPs. Real Pipeline.</h2></div>
+          <div class="widget">
+            <div class="container people">
+              {people.map((p) => (
+                <div class="col c50">
+                  <div class="wrap">
+                    <div class="widget pilot-person">
+                      <div class="container">
+                        <div class="col photo">
+                          <div class="wrap"><div class="widget img-c"><img src={p.photo} alt="" width={p.w} height={p.h} loading="lazy" /></div></div>
+                        </div>
+                        <div class="col text">
+                          <div class="wrap">
+                            <div class="widget quote" set:html={p.quote} />
+                            <div class="widget who"><h3 class="title">{p.name}</h3></div>
+                            <div class="widget role" set:html={p.role} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pilot-form-sec bg-tint" id="formSectn">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">Don't Get Left Out of the AI Conversation</h2></div>
+          <div class="widget">
+            <div class="container pilot-form-inner">
+              <div class="col">
+                <div class="wrap">
+                  <div class="widget" id="SmepageBtn">
+                    <script is:inline src="https://webforms.closeiocdn.com/webforms.js" type="module" crossorigin="anonymous" defer></script>
+                    <close-form id="form_0337A26sYwtiQuu4Vyn9iR"></close-form>
+                  </div>
+                  <div class="widget t-center pilot-note" set:html={w['0fb7f5a']} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pilot-faq">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          {faqs.map((f, i) => (
+            <div class="widget">
+              <div class="toggle">
+                <button class="toggle-title" type="button" aria-expanded="false" aria-controls={`pilot-faq-${i}`}>
+                  <span class="t-icon" aria-hidden="true"><i class="fas fa-caret-right closed"></i><i class="fas fa-caret-up opened"></i></span>
+                  {f.q}
+                </button>
+                <div class="toggle-content" id={`pilot-faq-${i}`} role="region"><p>{f.a}</p></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    })}
+  />
+</Base>
+
+<script>
+  // Elementor toggle: each item opens and closes independently.
+  document.querySelectorAll<HTMLButtonElement>('.toggle-title').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const open = btn.parentElement!.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+</script>

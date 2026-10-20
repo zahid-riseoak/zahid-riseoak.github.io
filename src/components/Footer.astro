@@ -1,0 +1,32 @@
+---
+// Elementor footer 2640.
+const links = [
+  { label: 'Blog', href: '/blog/' },
+  { label: 'Terms', href: '/msp-terms-and-conditions/' },
+  { label: 'Privacy', href: '/msp-privacy-policy/' },
+];
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="col">
+      <div class="wrap">
+        <div class="widget">
+          <div class="container footer-row">
+            <div class="col">
+              <div class="wrap">
+                <div class="widget footer-copy"><p>© {new Date().getFullYear()} RiseOak</p></div>
+              </div>
+            </div>
+            {links.map((link) => (
+              <div class="col">
+                <div class="wrap">
+                  <div class="widget footer-link"><h2><a href={link.href}>{link.label}</a></h2></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

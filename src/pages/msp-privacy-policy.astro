@@ -1,0 +1,29 @@
+---
+// Privacy — rebuild of Elementor page 2978. Body is the original text-editor HTML.
+import Base from '../layouts/Base.astro';
+import w from '../data/widgets/msp-privacy-policy.json';
+---
+<Base
+  title="Privacy Policy | RiseOak"
+  description="This privacy policy has been compiled to better serve those who are concerned with how their ‘Personally Identifiable Information’ (PII) is being used online."
+>
+  <section class="grad-hero legal mid">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title">RiseOak Privacy Policy</h2></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy-body">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget rich" set:html={w['4e0ae06']} />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

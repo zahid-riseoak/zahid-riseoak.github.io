@@ -1,0 +1,31 @@
+---
+// Ntiva case study — rebuild of Elementor page 647.
+import CaseStudy from '../layouts/CaseStudy.astro';
+import w from '../data/widgets/proof-case-studies-ntiva.json';
+import { cardsForNtiva } from '../data/case-cards';
+---
+<CaseStudy
+  meta={{
+    title: 'Proof // Case Studies // Ntiva -',
+    description: 'RiseOak Did Local SEO For Ntiva To Get Two to Three New IT Support Clients Per Month Consistently From The Washington DC Metro Area',
+  }}
+  hero={{ title: 'SEO Brings Two to Three New Clients a Month', html: w['c5a6a2a'], bg: '/images/2026/03/SEO-Brings-Two-to-Three-New-Clients-a-Month.jpg' }}
+  overview={{ html: w['6dc11c1'], logo: { src: '/images/2023/06/Ntiva-Logo-1024x379.jpg', w: 800, h: 296, alt: 'Ntiva-Logo' } }}
+  testimonial={{
+    text: 'We have closed some large deals based on leads coming from SEO. The majority of the Qualified inbound leads come from Google Search and SEO. Thanks, RiseOak for helping us with SEO.',
+    photo: '/images/2023/06/Holly-Dowden.jpg',
+    alt: 'Holly-Dowden',
+    name: 'Holly Dowden',
+    title: 'Vice President of Marketing at Ntiva',
+  }}
+  summary={w['e3562fc']}
+  challenges={{ html: w['eec6ef8'] }}
+  method={{ image: { src: '/images/2023/06/Ntiva-Results-1-1024x870.jpg', w: 800, h: 680 }, html: w['3a4a88f'] }}
+  results={{
+    title: 'Results and Future Plans',
+    minHeight: 1094,
+    image: { src: '/images/2023/06/Ntiva-Results-2.jpg', w: 385, h: 503 },
+    html: w['7434158'],
+  }}
+  cards={cardsForNtiva}
+/>

@@ -1,0 +1,67 @@
+---
+// "More case studies" block at the bottom of each case study page.
+export interface Card {
+  href: string;
+  image: string;
+  imageW: number;
+  imageH: number;
+  logo: string;
+  logoAlt: string;
+  logoW: number;
+  logoH: number;
+  /** Logo width in % for desktop / tablet / mobile. */
+  logoSize: [number, number, number];
+  logoPadBottom?: boolean;
+  text: string;
+  color: string;
+}
+interface Props {
+  cards: Card[];
+}
+const { cards } = Astro.props;
+---
+<section class="cs-more mid">
+  <div class="container">
+    <div class="col">
+      <div class="wrap">
+        <div class="widget">
+          <div class="container cs-more-inner">
+            {cards.map((c, i) => (
+              <div class="col c50">
+                <div class="wrap cs-card" style="flex-direction:column;flex-wrap:nowrap">
+                  <div class="widget" style="margin:0"><img src={c.image} alt="" width={c.imageW} height={c.imageH} loading="lazy" style="display:block;width:100%" /></div>
+                  <div class:list={['widget img-c logo-w', { 'pad-b': c.logoPadBottom }]} style="margin:0">
+                    <img src={c.logo} alt={c.logoAlt} width={c.logoW} height={c.logoH} loading="lazy" class={`card-logo-${i}`} />
+                  </div>
+                  <div class="widget card-text" style="margin:0"><p>{c.text}</p></div>
+                  <div class="widget card-btn" style="margin:0">
+                    <a href={c.href} style={`background-color:${c.color}`}>
+                      <i class="far fa-arrow-alt-circle-right" aria-hidden="true"></i>
+                      <span>SEE RESULTS</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style define:vars={{
+  l0d: `${cards[0]?.logoSize[0]}%`, l0t: `${cards[0]?.logoSize[1]}%`, l0m: `${cards[0]?.logoSize[2]}%`,
+  l1d: `${cards[1]?.logoSize[0]}%`, l1t: `${cards[1]?.logoSize[1]}%`, l1m: `${cards[1]?.logoSize[2]}%`,
+}}>
+  .card-logo-0 { width: var(--l0d); }
+  .card-logo-1 { width: var(--l1d); }
+  @media (max-width: 1024px) {
+    .card-logo-0 { width: var(--l0t); }
+    .card-logo-1 { width: var(--l1t); }
+  }
+  @media (max-width: 767px) {
+    .card-logo-0 { width: var(--l0m); }
+    .card-logo-1 { width: var(--l1m); }
+  }
+</style>

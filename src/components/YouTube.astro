@@ -1,0 +1,17 @@
+---
+// Elementor video widget (YouTube, controls on). Aspect ratio comes from the parent's CSS.
+interface Props {
+  id: string;
+  title: string;
+}
+const { id, title } = Astro.props;
+---
+<div class="yt">
+  <iframe
+    src={`https://www.youtube.com/embed/${id}?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0&enablejsapi=1`}
+    title={title}
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>
+</div>

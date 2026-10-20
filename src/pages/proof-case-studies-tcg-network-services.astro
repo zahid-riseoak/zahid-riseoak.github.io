@@ -1,0 +1,31 @@
+---
+// TCG Network Services case study — rebuild of Elementor page 679.
+import CaseStudy from '../layouts/CaseStudy.astro';
+import w from '../data/widgets/proof-case-studies-tcg-network-services.json';
+import { cardsForTcg } from '../data/case-cards';
+---
+<CaseStudy
+  meta={{
+    title: 'Proof // Case Studies // TCG Network Services -',
+    description: 'RiseOak helped TCG Network Services Go from Not Ranking At All to Ranking on The First Page of Google for Some Critical Keywords Within One Months',
+  }}
+  hero={{ title: 'SEO Speed Ranking', html: w['90502a3'], bg: '/images/2026/03/SEO-Speed-Ranking-img2.jpg' }}
+  overview={{ html: w['66c0071'], logo: { src: '/images/2023/06/TCGNS_Logo_Updated_2-1024x375.png', w: 800, h: 293, alt: 'TCGNS_Logo' } }}
+  testimonial={{
+    text: '“Working with RiseOak has been a very positive experience for my team. We were especially pleased with the quality of work and responsiveness. Already, in just a few short weeks, we are seeing a difference in our rankings. I highly recommend working with RiseOak.”',
+    photo: '/images/2023/06/Jonathan.jpeg',
+    alt: 'Marketing Director, TCG Network Services',
+    name: 'Jonathan Browning',
+    title: 'Marketing Director at TCG Network Services',
+  }}
+  summary={w['0b0b9f4']}
+  challenges={{ html: w['a3cd1ac'] }}
+  method={{ image: { src: '/images/2023/06/Figure-1-Big-Jumps-in-Cybersecurity-Boston-Rankings_1.jpg', w: 800, h: 302 }, html: w['a4e5c6e'] }}
+  results={{
+    title: 'Results and Future Plans',
+    minHeight: 833,
+    image: { src: '/images/2023/06/Figure-2-Big-Jump-in-Boston-IT-Support-Rankings_1.jpg', w: 444, h: 265 },
+    html: w['5706a1b'],
+  }}
+  cards={cardsForTcg}
+/>

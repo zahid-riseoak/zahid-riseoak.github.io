@@ -1,0 +1,87 @@
+---
+// Elementor media-carousel 7a35c65: loop, 1 slide per step, 500ms, arrows + bullets.
+// Slides per view / gap: desktop 4 / 50px, tablet 2 / 10px, mobile 1 / 10px.
+interface Props {
+  slides: { src: string; label: string }[];
+}
+const { slides } = Astro.props;
+---
+<div class="carousel" data-carousel>
+  <div class="carousel-viewport" role="region" aria-roledescription="carousel" aria-label="Slides">
+    <div class="carousel-track">
+      {slides.map((s) => (
+        <div class="carousel-slide" role="group" aria-roledescription="slide">
+          <div class="carousel-img" role="img" aria-label={s.label} style={`background-image:url('${s.src}')`}></div>
+        </div>
+      ))}
+    </div>
+    <button class="carousel-btn carousel-prev" type="button" aria-label="Previous"><i class="eicon eicon-chevron-left" aria-hidden="true"></i></button>
+    <button class="carousel-btn carousel-next" type="button" aria-label="Next"><i class="eicon eicon-chevron-right" aria-hidden="true"></i></button>
+    <div class="carousel-dots"></div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const viewport = root.querySelector<HTMLElement>('.carousel-viewport')!;
+    const track = root.querySelector<HTMLElement>('.carousel-track')!;
+    const originals = Array.from(track.children) as HTMLElement[];
+    const count = originals.length;
+    const dots = root.querySelector<HTMLElement>('.carousel-dots')!;
+
+    // Clone a full set on each side so the loop never shows a gap.
+    originals.forEach((s) => track.append(s.cloneNode(true)));
+    originals.slice().reverse().forEach((s) => track.prepend(s.cloneNode(true)));
+    Array.from(track.children).forEach((s, i) => {
+      if (i < count || i >= count * 2) s.setAttribute('aria-hidden', 'true');
+    });
+
+    const bullets = originals.map((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      b.addEventListener('click', () => go(count + i));
+      dots.append(b);
+      return b;
+    });
+
+    let index = count;
+    let perView = 4;
+    let gap = 50;
+    let step = 0;
+
+    const layout = () => {
+      const w = window.innerWidth;
+      perView = w <= 767 ? 1 : w <= 1024 ? 2 : 4;
+      gap = w <= 1024 ? 10 : 50;
+      const slideW = (viewport.clientWidth - gap * (perView - 1)) / perView;
+      step = slideW + gap;
+      track.style.gap = `${gap}px`;
+      Array.from(track.children).forEach((s) => ((s as HTMLElement).style.width = `${slideW}px`));
+      move(false);
+    };
+
+    const move = (animate: boolean) => {
+      track.style.transition = animate ? 'transform .5s ease' : 'none';
+      track.style.transform = `translateX(${-index * step}px)`;
+      const active = ((index - count) % count + count) % count;
+      bullets.forEach((b, i) => b.classList.toggle('active', i === active));
+    };
+
+    const go = (to: number) => {
+      index = to;
+      move(true);
+    };
+
+    track.addEventListener('transitionend', () => {
+      if (index >= count * 2) index -= count;
+      else if (index < count) index += count;
+      move(false);
+    });
+
+    root.querySelector('.carousel-prev')!.addEventListener('click', () => go(index - 1));
+    root.querySelector('.carousel-next')!.addEventListener('click', () => go(index + 1));
+    window.addEventListener('resize', layout);
+    layout();
+  });
+</script>

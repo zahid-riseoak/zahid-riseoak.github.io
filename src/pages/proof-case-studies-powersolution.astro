@@ -1,0 +1,45 @@
+---
+// Powersolution case study — rebuild of Elementor page 4527 (adds two videos and a second quote).
+import CaseStudy from '../layouts/CaseStudy.astro';
+import w from '../data/widgets/proof-case-studies-powersolution.json';
+import { cardsForPowersolution } from '../data/case-cards';
+---
+<CaseStudy
+  meta={{
+    title: 'Proof // Case Studies // Powersolution-New -',
+    description: 'RiseOak Helped Powersolution.com scale from <100 to 1,000+ daily visitors, driving numerous new contracts and a major win with an international mid-market',
+    robots: 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large',
+  }}
+  hero={{ title: '10x Traffic Growth and Multiple Contract Wins for Powersolution', html: w['90502a3'], bg: '/images/2026/02/powersolution-case-study.jpg', shortOnMobile: true }}
+  overview={{ html: w['66c0071'], logo: { src: '/images/2026/02/cropped-ps_logo_2022_web_sm.png', w: 240, h: 40, alt: 'powersolution-logo' } }}
+  testimonial={{
+    text: '“We\'ve had numerous deals that came to us via potential customers that visited our website... One in particular gave us very strong year-end results where we sold the deal to a mid-market manufacturer... We credit that lead mostly to RiseOak.”',
+    photo: '/images/2026/01/Peter-Jacobson.jpg',
+    alt: 'Peter Jacobson',
+    name: 'Peter Jacobson',
+    title: 'Director of Business Development, Powersolution.com',
+  }}
+  video="UfCuIEkhRQA"
+  summary={w['0b0b9f4']}
+  challenges={{ html: w['a3cd1ac'], minHeight: 400, size: 22 }}
+  testimonial2={{
+    text: '“ RiseOak has transformed our online visibility. In just a few months, our rankings have increased significantly, directly leading to a surge in new website leads. Prasanna is extremely easy to work with, transparent about the process, and—most importantly—delivers the results that other vendors couldn’t. I definitely recommend their services to any organization looking to dominate their local SEO. ”',
+    photo: '/images/2024/05/Untitled-design-7.png',
+    alt: 'David Ruchman',
+    name: 'David Ruchman',
+    title: 'CEO, Powersolution.com',
+  }}
+  video2="vtB-Mo9kJ0M"
+  method={{ image: { src: '/images/2026/02/Powersolutions-Top-10-Rankings.png', w: 1318, h: 331 }, html: w['a4e5c6e'] }}
+  results={{
+    title: 'Results',
+    minHeight: 1094,
+    intro: w['5706a1b'],
+    pair: [
+      { src: '/images/2026/02/Powersolutions-Sample-Ranking-Movements-2.png', w: 379, h: 577 },
+      { src: '/images/2026/02/Powersolutions-Sample-Ranking-Movements-1.png', w: 379, h: 577 },
+    ],
+    html: w['df5a812'],
+  }}
+  cards={cardsForPowersolution}
+/>

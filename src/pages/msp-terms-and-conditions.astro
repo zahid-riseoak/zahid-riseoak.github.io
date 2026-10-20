@@ -1,0 +1,26 @@
+---
+// Terms — rebuild of Elementor page 2982. Body is the original text-editor HTML.
+import Base from '../layouts/Base.astro';
+import w from '../data/widgets/msp-terms-and-conditions.json';
+---
+<Base title="Terms and Conditions | RiseOak" description="Last updated: August 13, 2016">
+  <section class="grad-hero legal mid">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title">Terms and Conditions</h2></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget rich" set:html={w['d60a138']} />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,178 @@
+---
+// Wins — rebuild of Elementor page 2590.
+import Base from '../layouts/Base.astro';
+import YouTube from '../components/YouTube.astro';
+import gallery from '../data/wins-gallery.json';
+
+const local = (u: string) => u.replace('https://riseoak.com/wp-content/uploads/', '/images/');
+const filters = Object.entries(gallery.filters).map(([key, label]) => ({ key, label }));
+const items = gallery.items.map((it) => ({ ...it, full: local(it.full), thumb: local(it.thumb) }));
+
+const videos = [
+  'UfCuIEkhRQA', 'Pv3GiY29bOk', 'oV6-fjwetkE',
+  'igqloi5abEE', 'vtB-Mo9kJ0M', '-TulhvPpxv0',
+  'EofF0wmbakI', 'C_zb68Z-GSQ',
+];
+const videoRows = [videos.slice(0, 3), videos.slice(3, 6), videos.slice(6)];
+
+const cases = [
+  { href: '/proof-case-studies-powersolution/', img: '/images/2026/02/Powersolution-case-study-thumbnail-img-1.jpg', alt: 'Powersolution case study thumbnail-img-1' },
+  { href: '/proof-case-studies-ntiva/', img: '/images/2024/09/ssffsf-2.jpg', alt: '' },
+  { href: '/proof-case-studies-tcg-network-services/', img: '/images/2024/09/ssffsf-5.jpg', alt: '' },
+];
+---
+<Base
+  title="Proven MSP Success | RiseOak"
+  description="Discover how we’ve helped MSPs achieve success. See why our clients trust us to deliver results!"
+>
+  <section class="wins-hero">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h1 class="title">Proven MSP Success</h1></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wins-jump">
+    <div class="container">
+      <div class="col c50"><div class="wrap"><div class="widget t-center"><p><a href="#videos">Video Testimonials</a></p></div></div></div>
+      <div class="col c50"><div class="wrap"><div class="widget t-center"><p><a href="#case_studies">Case Studies</a></p></div></div></div>
+    </div>
+  </section>
+
+  <section class="wins-gallery">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget" data-gallery>
+            <div class="gallery-filters" role="group" aria-label="Gallery filter">
+              {filters.map((f) => (
+                <button type="button" class:list={['gallery-filter', { active: f.key === 'all' }]} data-filter={f.key} aria-pressed={f.key === 'all' ? 'true' : 'false'}>{f.label}</button>
+              ))}
+            </div>
+            <div class="gallery-grid">
+              {items.map((it) => (
+                <a class="gallery-item" href={it.full} data-tags={it.tags.join(',')} data-title={it.title} aria-label={it.title}>
+                  <div class="gallery-img" style={`background-image:url('${it.thumb}')`} role="img" aria-label=""></div>
+                  <div class="gallery-overlay"></div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wins-sec-head" id="videos">
+    <div class="container">
+      <div class="col"><div class="wrap"><div class="widget t-center"><h2 class="title">Video Testimonials</h2></div></div></div>
+    </div>
+  </section>
+
+  {videoRows.map((row) => (
+    <section class="wins-videos">
+      <div class="container">
+        {[0, 1, 2].map((i) => (
+          <div class="col c33">
+            <div class="wrap">
+              {row[i] && <div class="widget"><YouTube id={row[i]} title="Client video testimonial" /></div>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <section class="wins-sec-head" id="case_studies">
+    <div class="container">
+      <div class="col"><div class="wrap"><div class="widget t-center"><h2 class="title">Case Studies</h2></div></div></div>
+    </div>
+  </section>
+
+  <section class="wins-cases">
+    <div class="container">
+      {cases.map((c) => (
+        <div class="col c33">
+          <div class="wrap">
+            <div class="widget">
+              <a class="case-card" href={c.href}><img src={c.img} alt={c.alt} width="750" height="500" loading="lazy" /></a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" data-lightbox>
+    <span class="lightbox-count"></span>
+    <button class="lightbox-btn lightbox-close" type="button" aria-label="Close"><i class="eicon" aria-hidden="true">&#xe87f;</i></button>
+    <button class="lightbox-btn lightbox-prev" type="button" aria-label="Previous"><i class="eicon eicon-chevron-left" aria-hidden="true"></i></button>
+    <img alt="" />
+    <button class="lightbox-btn lightbox-next" type="button" aria-label="Next"><i class="eicon eicon-chevron-right" aria-hidden="true"></i></button>
+  </div>
+</Base>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-gallery]')!;
+  const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('.gallery-filter'));
+  const items = Array.from(root.querySelectorAll<HTMLAnchorElement>('.gallery-item'));
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.filter!;
+      buttons.forEach((b) => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      items.forEach((it) => {
+        it.hidden = key !== 'all' && !it.dataset.tags!.split(',').includes(key);
+      });
+    });
+  });
+
+  // Lightbox cycles through the items visible under the current filter.
+  const box = document.querySelector<HTMLElement>('[data-lightbox]')!;
+  const img = box.querySelector('img')!;
+  const count = box.querySelector<HTMLElement>('.lightbox-count')!;
+  let list: HTMLAnchorElement[] = [];
+  let pos = 0;
+
+  const show = () => {
+    const it = list[pos];
+    img.src = it.href;
+    img.alt = it.dataset.title ?? '';
+    count.textContent = `${pos + 1} / ${list.length}`;
+  };
+  const close = () => {
+    box.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  const step = (d: number) => {
+    pos = (pos + d + list.length) % list.length;
+    show();
+  };
+
+  items.forEach((it) => {
+    it.addEventListener('click', (e) => {
+      e.preventDefault();
+      list = items.filter((x) => !x.hidden);
+      pos = list.indexOf(it);
+      show();
+      box.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  box.querySelector('.lightbox-close')!.addEventListener('click', close);
+  box.querySelector('.lightbox-prev')!.addEventListener('click', () => step(-1));
+  box.querySelector('.lightbox-next')!.addEventListener('click', () => step(1));
+  box.addEventListener('click', (e) => { if (e.target === box) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+</script>

@@ -1,0 +1,25 @@
+---
+// Elementor Pro testimonial-carousel, bubble skin, image inline. Each case study has one slide
+// in a 2-per-view swiper, so the bubble fills half the 72%-wide track on desktop.
+interface Props {
+  text: string;
+  photo: string;
+  alt: string;
+  name: string;
+  title: string;
+}
+const { text, photo, alt, name, title } = Astro.props;
+---
+<div class="bubble-slider" role="region" aria-roledescription="carousel" aria-label="Slides">
+  <div class="bubble-slide" role="group" aria-roledescription="slide">
+    <div class="bubble">
+      <div class="bubble-content">
+        <div class="bubble-text">{text}</div>
+      </div>
+      <div class="bubble-footer">
+        <img src={photo} alt={alt} loading="lazy" />
+        <cite><span class="bubble-name">{name}</span><span class="bubble-title">{title}</span></cite>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+---
+// Shared layout for /proof-case-studies-*/ (Elementor pages 647, 679, 4527).
+import Base from './Base.astro';
+import BubbleTestimonial from '../components/BubbleTestimonial.astro';
+import CaseStudyCards, { type Card } from '../components/CaseStudyCards.astro';
+import YouTube from '../components/YouTube.astro';
+
+interface Img { src: string; w: number; h: number; alt?: string }
+interface Quote { text: string; photo: string; alt: string; name: string; title: string }
+interface Props {
+  meta: { title: string; description: string; robots?: string };
+  hero: { title: string; html: string; bg: string; shortOnMobile?: boolean };
+  overview: { html: string; logo: Img };
+  testimonial: Quote;
+  video?: string;
+  summary: string;
+  challenges: { html: string; minHeight?: number; size?: number };
+  testimonial2?: Quote;
+  video2?: string;
+  method: { image: Img; html: string };
+  results: { title: string; minHeight: number; image?: Img; intro?: string; pair?: [Img, Img]; html: string };
+  cards: Card[];
+}
+const p = Astro.props;
+---
+<Base title={p.meta.title} description={p.meta.description} robots={p.meta.robots}>
+  <section class:list={['cs-hero mid', { short: p.hero.shortOnMobile }]} style={`background-image:url('${p.hero.bg}')`}>
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget">
+            <div class="container">
+              <div class="col left">
+                <div class="wrap">
+                  <div class="widget"><h1 class="title">{p.hero.title}</h1></div>
+                  <div class="widget rich" set:html={p.hero.html} />
+                </div>
+              </div>
+              <div class="col right"><div class="wrap"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-overview cs-sec mid">
+    <div class="container">
+      <div class="col main">
+        <div class="wrap">
+          <div class="widget"><h2 class="title">Client Overview</h2></div>
+          <div class="widget rich" set:html={p.overview.html} />
+        </div>
+      </div>
+      <div class="col logo">
+        <div class="wrap" style="align-content:center">
+          <div class="widget img-c"><img src={p.overview.logo.src} alt={p.overview.logo.alt ?? ''} width={p.overview.logo.w} height={p.overview.logo.h} /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="col"><div class="wrap"><div class="widget"><BubbleTestimonial {...p.testimonial} /></div></div></div>
+    </div>
+  </section>
+
+  {p.video && (
+    <section class="cs-video">
+      <div class="container"><div class="col"><div class="wrap"><div class="widget"><YouTube id={p.video} title={`${p.testimonial.name} testimonial`} /></div></div></div></div>
+    </section>
+  )}
+
+  <section class="cs-summary cs-sec cs-peach mid">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget"><h2 class="title">Executive Summary</h2></div>
+          <div class="widget rich" set:html={p.summary} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-challenges cs-sec cs-white mid">
+    <div class="container" style={p.challenges.minHeight ? `min-height:${p.challenges.minHeight}px` : undefined}>
+      <div class="col">
+        <div class="wrap">
+          <div class="widget"><h2 class="title">Challenges</h2></div>
+          <div class="widget rich" style={p.challenges.size ? `font-size:${p.challenges.size}px` : undefined} set:html={p.challenges.html} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {p.testimonial2 && (
+    <section>
+      <div class="container">
+        <div class="col"><div class="wrap"><div class="widget"><BubbleTestimonial {...p.testimonial2} /></div></div></div>
+      </div>
+    </section>
+  )}
+
+  {p.video2 && (
+    <section class="cs-video">
+      <div class="container"><div class="col"><div class="wrap"><div class="widget"><YouTube id={p.video2} title={`${p.testimonial2?.name ?? 'Client'} testimonial`} /></div></div></div></div>
+    </section>
+  )}
+
+  <section class="cs-method cs-sec cs-peach">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget"><h2 class="title">Method</h2></div>
+          <div class="widget img-c full"><img src={p.method.image.src} alt="" width={p.method.image.w} height={p.method.image.h} loading="lazy" /></div>
+          <div class="widget rich" set:html={p.method.html} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-results cs-sec cs-white mid">
+    <div class="container" style={`min-height:${p.results.minHeight}px`}>
+      <div class="col">
+        <div class="wrap">
+          <div class="widget res-h2"><h2 class="title">{p.results.title}</h2></div>
+          {p.results.image && (
+            <div class="widget img-c chart"><img src={p.results.image.src} alt="" width={p.results.image.w} height={p.results.image.h} loading="lazy" /></div>
+          )}
+          {p.results.intro && <div class="widget rich" set:html={p.results.intro} />}
+          {p.results.pair && (
+            <div class="widget">
+              <div class="container">
+                {p.results.pair.map((im) => (
+                  <div class="col c50"><div class="wrap"><div class="widget img-c"><img src={im.src} alt="" width={im.w} height={im.h} loading="lazy" /></div></div></div>
+                ))}
+              </div>
+            </div>
+          )}
+          <div class="widget rich" set:html={p.results.html} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CaseStudyCards cards={p.cards} />
+</Base>

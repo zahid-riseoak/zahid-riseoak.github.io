@@ -1,12 +1,9 @@
 ---
 // Consultation — rebuild of Elementor page 3120 (landing chrome, no header menu).
-// The original Elementor form posts to WordPress admin-ajax with reCAPTCHA v3; this static
-// build posts the same field names to PUBLIC_CONSULTATION_FORM_ACTION when it is set.
+// The form is a Netlify Form (see components/LeadForm.astro).
 import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
 import w from '../data/widgets/consultation.json';
-
-const action = import.meta.env.PUBLIC_CONSULTATION_FORM_ACTION ?? '';
-const sources = ['Google Search ', 'ChannelPro Newsletter', 'ChannelPro Website', 'RiseOak Email', 'RiseOak Call', 'Referral', 'Other'];
 ---
 <Base
   title="Apply Free Consultation"
@@ -47,43 +44,7 @@ const sources = ['Google Search ', 'ChannelPro Newsletter', 'ChannelPro Website'
       <div class="col">
         <div class="wrap center">
           <div class="widget e-form">
-            <form method="post" action={action || undefined} name="New Form" aria-label="New Form" data-endpoint={action} novalidate>
-              <input type="hidden" name="referer_title" value="Apply Free Consultation" />
-              <div class="fields">
-                <div class="group required">
-                  <label class="lbl" for="form-field-name">Name</label>
-                  <input class="field" type="text" name="form_fields[name]" id="form-field-name" placeholder="Name" required />
-                </div>
-                <div class="group required">
-                  <label class="lbl" for="form-field-email">Email</label>
-                  <input class="field" type="email" name="form_fields[email]" id="form-field-email" placeholder="Email" required />
-                </div>
-                <div class="group required">
-                  <label class="lbl" for="form-field-field_d83a345">Source of Visit</label>
-                  <div class="select-wrap">
-                    <span class="caret" aria-hidden="true"><i class="eicon">&#xe92a;</i></span>
-                    <select class="field" name="form_fields[field_d83a345]" id="form-field-field_d83a345" required>
-                      <option value="">Please Choose </option>
-                      {sources.map((s) => <option value={s}>{s}</option>)}
-                    </select>
-                  </div>
-                </div>
-                <div class="group required">
-                  <label class="lbl" for="form-field-field_380d02c">Mobile phone</label>
-                  <input class="field" type="tel" name="form_fields[field_380d02c]" id="form-field-field_380d02c" placeholder="Mobile phone" required pattern="[0-9()#&+*\-=.]+" title="Only numbers and phone characters (#, -, *, etc) are accepted." />
-                </div>
-                <div class="group">
-                  <span class="acceptance">
-                    <input type="checkbox" name="form_fields[field_7be2914]" id="form-field-field_7be2914" required />
-                    <label for="form-field-field_7be2914">By submitting contact information on this website, you are consenting to receive calls, SMS, and emails from RiseOak. You certify that you are the owner of the contact information provided.</label>
-                  </span>
-                </div>
-                <div class="group">
-                  <button class="submit" type="submit">Apply For Consultation</button>
-                </div>
-                <div class="form-msg" role="status" aria-live="polite" hidden></div>
-              </div>
-            </form>
+            <LeadForm name="consultation" submitLabel="Apply For Consultation" />
           </div>
         </div>
       </div>
@@ -107,34 +68,3 @@ const sources = ['Google Search ', 'ChannelPro Newsletter', 'ChannelPro Website'
     </div>
   </section>
 </Base>
-
-<script>
-  const form = document.querySelector<HTMLFormElement>('.e-form form')!;
-  const msg = form.querySelector<HTMLElement>('.form-msg')!;
-  const say = (text: string, kind: 'error' | 'success') => {
-    msg.textContent = text;
-    msg.className = `form-msg ${kind}`;
-    msg.hidden = false;
-  };
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    const endpoint = form.dataset.endpoint;
-    if (!endpoint) {
-      say('This form is not connected yet. Set PUBLIC_CONSULTATION_FORM_ACTION to enable submissions.', 'error');
-      return;
-    }
-    try {
-      const res = await fetch(endpoint, { method: 'POST', body: new FormData(form) });
-      if (!res.ok) throw new Error(String(res.status));
-      form.reset();
-      say('The form was sent successfully.', 'success');
-    } catch {
-      say('An error occurred.', 'error');
-    }
-  });
-</script>

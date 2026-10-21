@@ -213,9 +213,9 @@ h2.elementor-heading-title { line-height: 50px; }
   transition: all .3s;
 }
 .e-form .submit:hover { background: #ff8400; }
-.e-form .form-msg { width: 100%; margin: 10px 5px 0; font-size: 15px; }
-.e-form .form-msg.error { color: #d9534f; }
-.e-form .form-msg.success { color: #5cb85c; }
+.e-form .hp-field { display: none; }
+/* AI Pilot: the form fills its 595px column instead of the consultation page's 40%. */
+.e-form.e-form-full { width: 100%; max-width: 100%; }
 
 .consult-quote { padding: 10px 0 30px; }
 .consult-quote > .container { max-width: 500px; }
@@ -581,4 +581,14 @@ h2.elementor-heading-title { line-height: 50px; }
   .author-head-inner { flex-wrap: nowrap; }
   .archive-grid { grid-template-columns: 1fr; }
   .archive-thumb div { padding-bottom: 50%; }
+}
+
+/* ---------- Thank you ---------- */
+.thanks-body { padding: 50px 0 70px; }
+.thanks-body > .container { max-width: 760px; }
+.thanks-body .rich { font-size: 23px; }
+
+@media (max-width: 767px) {
+  .thanks-body { padding: 30px 20px 50px; }
+  .thanks-body .rich { font-size: 20px; }
 }

@@ -1,0 +1,52 @@
+---
+// Lead form handled by Netlify Forms. Netlify finds it in the built HTML at deploy time
+// (data-netlify + name), so it must stay plain static markup: no script intercepts submit.
+// Fields and copy match the live Elementor consultation form.
+interface Props {
+  /** Netlify form name; also sent as the hidden "form-name" value. */
+  name: string;
+  submitLabel: string;
+}
+const { name, submitLabel } = Astro.props;
+const id = (field: string) => `${name}-${field}`;
+const sources = ['Google Search', 'ChannelPro Newsletter', 'ChannelPro Website', 'RiseOak Email', 'RiseOak Call', 'Referral', 'Other'];
+---
+<form name={name} method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you/" aria-label={name}>
+  <input type="hidden" name="form-name" value={name} />
+  <p class="hp-field" aria-hidden="true">
+    <label>Don’t fill this out if you’re human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+  <div class="fields">
+    <div class="group required">
+      <label class="lbl" for={id('name')}>Name</label>
+      <input class="field" type="text" name="name" id={id('name')} placeholder="Name" autocomplete="name" required />
+    </div>
+    <div class="group required">
+      <label class="lbl" for={id('email')}>Email</label>
+      <input class="field" type="email" name="email" id={id('email')} placeholder="Email" autocomplete="email" required />
+    </div>
+    <div class="group required">
+      <label class="lbl" for={id('source')}>Source of Visit</label>
+      <div class="select-wrap">
+        <span class="caret" aria-hidden="true"><i class="eicon">&#xe92a;</i></span>
+        <select class="field" name="source" id={id('source')} required>
+          <option value="">Please Choose</option>
+          {sources.map((s) => <option value={s}>{s}</option>)}
+        </select>
+      </div>
+    </div>
+    <div class="group required">
+      <label class="lbl" for={id('phone')}>Mobile phone</label>
+      <input class="field" type="tel" name="phone" id={id('phone')} placeholder="Mobile phone" autocomplete="tel" required pattern="[0-9()#&+*\-=. ]+" title="Only numbers and phone characters (#, -, *, etc) are accepted." />
+    </div>
+    <div class="group">
+      <span class="acceptance">
+        <input type="checkbox" name="consent" value="yes" id={id('consent')} required />
+        <label for={id('consent')}>By submitting contact information on this website, you are consenting to receive calls, SMS, and emails from RiseOak. You certify that you are the owner of the contact information provided.</label>
+      </span>
+    </div>
+    <div class="group">
+      <button class="submit" type="submit">{submitLabel}</button>
+    </div>
+  </div>
+</form>

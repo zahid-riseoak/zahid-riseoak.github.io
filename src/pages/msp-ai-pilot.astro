@@ -1,6 +1,7 @@
 ---
 // MSP AI Pilot — rebuild of Elementor page 4645 (landing chrome, no header menu).
 import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
 import w from '../data/widgets/msp-ai-pilot.json';
 
 const logos = [
@@ -115,9 +116,8 @@ const faqs = [
             <div class="container pilot-form-inner">
               <div class="col">
                 <div class="wrap">
-                  <div class="widget" id="SmepageBtn">
-                    <script is:inline src="https://webforms.closeiocdn.com/webforms.js" type="module" crossorigin="anonymous" defer></script>
-                    <close-form id="form_0337A26sYwtiQuu4Vyn9iR"></close-form>
+                  <div class="widget e-form e-form-full" id="SmepageBtn">
+                    <LeadForm name="ai-pilot" submitLabel="Get My Pilot" />
                   </div>
                   <div class="widget t-center pilot-note" set:html={w['0fb7f5a']} />
                 </div>

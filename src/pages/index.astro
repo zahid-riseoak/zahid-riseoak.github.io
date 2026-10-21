@@ -2,6 +2,7 @@
 // Homepage — rebuild of Elementor page 984. Section order matches riseoak.com.
 import Base from '../layouts/Base.astro';
 import LogoCarousel from '../components/LogoCarousel.astro';
+import { getSortedPosts } from '../lib/posts';
 
 const img = (p: string) => `/images/${p}`;
 
@@ -73,11 +74,13 @@ const faqs = [
   { q: 'What is you process? What will you do?', a: 'We begin by ensuring that your web presence is optimized to attract and convert prospects. We have found that many MSPs we work with do not have this foundation in place. Next, we increase the authority of your web presence to attract and convert local prospects who are searching for Managed IT Services.' },
 ];
 
-// The live site pulls the two latest posts; these mirror it until the blog is rebuilt.
-const posts = [
-  { href: '/how-to-get-cited-by-ai-msp-content/', img: img('2026/09/MSP-Content-That-AI-Engines-Cite-img-1.jpg'), alt: '', title: 'How to Write MSP Content That AI Engines Cite in 2026' },
-  { href: '/94-of-b2b-buyers-use-ai-search-so-what-is-aeo-doing-for-your-msp/', img: img('2026/07/What-Is-AEO-Doing-for-Your-MSP-img.jpg'), alt: 'What is AEO', title: '94% of B2B Buyers Use AI Search — So What Is AEO Doing for Your MSP?' },
-];
+// "MSP Marketing Academy": the two newest posts, as on the live site.
+const posts = (await getSortedPosts()).slice(0, 2).map((p) => ({
+  href: `/${p.id}/`,
+  img: p.data.featuredImage,
+  alt: p.data.featuredImageAlt,
+  title: p.data.title,
+}));
 ---
 <Base
   title="MSP Marketing Agency | RiseOak"

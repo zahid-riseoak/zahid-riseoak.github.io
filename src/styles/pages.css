@@ -553,3 +553,32 @@ h2.elementor-heading-title { line-height: 50px; }
   .bubble-name { font-size: 18px; }
   .bubble-title { font-size: 12px; }
 }
+
+/* ---------- Author archive (template 4180) ---------- */
+.author-head-inner { max-width: 557px; margin-inline: auto; align-items: center; }
+.author-photo { width: 21.963%; }
+.author-photo img { border-radius: 100px; }
+.author-name { width: 78.037%; }
+.author-name h2.title { margin-top: -8px; font-size: 22px; font-weight: 600; line-height: 1; }
+.author-posts { padding: 20px 0 50px; }
+.archive-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 30px; row-gap: 35px; }
+.archive-post { display: flex; flex-direction: column; overflow: hidden; }
+.archive-thumb { display: block; width: 100%; margin-bottom: 20px; }
+.archive-thumb div { position: relative; padding-bottom: 66%; overflow: hidden; }
+.archive-thumb img { position: absolute; top: 50%; left: 50%; width: 100%; height: auto; transform: translate(-50%, -50%); }
+.archive-text { display: flex; flex-direction: column; flex-grow: 1; }
+.archive-title { margin: 0 0 10px; font-size: 18px; font-weight: 600; line-height: 1.2; }
+.archive-title a { color: var(--text); }
+.archive-excerpt { margin-bottom: 10px; }
+.archive-excerpt p { margin: 0; font-size: 14px; line-height: 1.5em; color: #777; }
+.archive-more { align-self: flex-start; font-size: 12px; font-weight: 500; color: #ff3d42; }
+
+@media (max-width: 1024px) {
+  .author-posts { padding: 0 0 40px; }
+  .archive-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .author-head-inner { flex-wrap: nowrap; }
+  .archive-grid { grid-template-columns: 1fr; }
+  .archive-thumb div { padding-bottom: 50%; }
+}

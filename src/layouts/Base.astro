@@ -16,12 +16,15 @@ interface Props {
   /** Landing-page chrome (Elementor header 1906 / footer 1953): empty white bars, no menu. */
   minimal?: boolean;
   robots?: string;
+  /** The page supplies its own canonical/OG tags through the "head" slot. */
+  customMeta?: boolean;
 }
 const {
   title,
   description,
   minimal = false,
   robots = 'index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large',
+  customMeta = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -33,12 +36,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <meta name="robots" content={robots} />
-    <link rel="canonical" href={canonical} />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    {description && <meta property="og:description" content={description} />}
-    <meta property="og:url" content={canonical} />
+    {!customMeta && (
+      <>
+        <link rel="canonical" href={canonical} />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        {description && <meta property="og:description" content={description} />}
+        <meta property="og:url" content={canonical} />
+      </>
+    )}
+    <slot name="head" />
     <link rel="icon" href="/favicon.jpg" sizes="32x32" />
     <link rel="icon" href="/favicon.jpg" sizes="192x192" />
     <link rel="apple-touch-icon" href="/favicon.jpg" />

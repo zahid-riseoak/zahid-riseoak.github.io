@@ -1,0 +1,71 @@
+---
+// Author archive — rebuild of Elementor archive template 4180 for /author/prasanna/.
+// Lists every post on this site by the author (imported posts first, newest first).
+// The live archive pages through ~25 posts; only the ones rebuilt here are listed.
+import Base from '../../layouts/Base.astro';
+import { getSortedPosts, legacyPosts, listExcerpt } from '../../lib/posts';
+
+const name = 'Prasanna Perera';
+const imported = (await getSortedPosts())
+  .filter((p) => p.data.author === name)
+  .map((p) => ({ href: `/${p.id}/`, img: p.data.featuredImage, alt: p.data.featuredImageAlt, title: p.data.title, excerpt: listExcerpt(p.data.excerpt) }));
+const posts = [...imported, ...legacyPosts];
+---
+<Base title="Prasanna Perera -" robots="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" customMeta>
+  <Fragment slot="head">
+    <link rel="canonical" href="https://riseoak.com/author/prasanna/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Prasanna Perera -" />
+    <meta property="og:url" content="https://riseoak.com/author/prasanna/" />
+    <meta property="og:site_name" content="RiseOak" />
+  </Fragment>
+
+  <section class="author-head">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget">
+            <div class="container author-head-inner">
+              <div class="col author-photo">
+                <div class="wrap">
+                  <div class="widget"><img src="/images/blog/authors/prasanna-perera.jpg" alt="" width="96" height="96" /></div>
+                </div>
+              </div>
+              <div class="col author-name">
+                <div class="wrap">
+                  <div class="widget"><h2 class="title">{name}</h2></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="author-posts">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget">
+            <div class="archive-grid" role="list">
+              {posts.map((p) => (
+                <article class="archive-post" role="listitem">
+                  <a class="archive-thumb" href={p.href} tabindex="-1">
+                    <div><img src={encodeURI(p.img)} alt={p.alt} width="300" height="200" loading="lazy" /></div>
+                  </a>
+                  <div class="archive-text">
+                    <h3 class="archive-title"><a href={p.href}>{p.title}</a></h3>
+                    <div class="archive-excerpt"><p>{p.excerpt}</p></div>
+                    <a class="archive-more" href={p.href} aria-label={`Read more about ${p.title}`} tabindex="-1">Read More »</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

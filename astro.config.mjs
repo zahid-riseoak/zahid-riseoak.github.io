@@ -9,5 +9,6 @@ export default defineConfig({
   redirects: {
     '/msp-marketing-agency/': '/',
     '/apply-free-consultation/': '/consultation/',
+    '/msp-ai-visibility-roadmap/': '/msp-ai-pilot/',
   },
 });

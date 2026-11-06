@@ -341,7 +341,7 @@ h2.title { line-height: 50px; }
 
 /* ---------- Card testimonials ---------- */
 .cards { padding: 10px 0 70px; }
-.cards-row { padding-top: 35px; }
+.cards-row { padding-top: 35px; flex-wrap: wrap; row-gap: 30px; }
 .t-card {
   background: #fff;
   border-radius: 5px;

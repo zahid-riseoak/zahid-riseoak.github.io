@@ -1,0 +1,37 @@
+---
+// Elementor accordion: one panel open at a time, clicking the open one closes it.
+interface Props {
+  faqs: { q: string; a: string }[];
+}
+const { faqs } = Astro.props;
+---
+<div class="widget accordion">
+  {faqs.map((f, i) => (
+    <div class:list={['acc-item', { active: i === 0 }]}>
+      <button class="acc-title" type="button" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`faq-${i}`} id={`faq-title-${i}`}>
+        <span class="acc-icon" aria-hidden="true"><i class="fas fa-caret-right closed"></i><i class="fas fa-caret-down opened"></i></span>
+        {f.q}
+      </button>
+      <div class="acc-content" id={`faq-${i}`} role="region" aria-labelledby={`faq-title-${i}`}><p>{f.a}</p></div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.accordion').forEach((acc) => {
+    acc.querySelectorAll<HTMLButtonElement>('.acc-title').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.acc-item')!;
+        const wasOpen = item.classList.contains('active');
+        acc.querySelectorAll('.acc-item').forEach((el) => {
+          el.classList.remove('active');
+          el.querySelector('.acc-title')!.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,31 @@
+---
+// Case study cards for the MSP and SaaS landing pages.
+interface Props {
+  cases: {
+    href: string;
+    title: string;
+    img: string;
+    w: number;
+    h: number;
+    /** Set for a client logo; leave out for a thumbnail that fills the card. */
+    logoAlt?: string;
+  }[];
+}
+const { cases } = Astro.props;
+---
+<section class="ml-sec ml-cases">
+  <div class="ml-wrap">
+    <h2 class="ml-h2">Case Studies</h2>
+    <div class:list={['ml-case-grid', { two: cases.length === 2 }]}>
+      {cases.map((c) => (
+        <article class="ml-case">
+          <a class:list={['ml-case-img', { 'ml-case-logo': c.logoAlt }]} href={c.href} tabindex="-1">
+            <img src={c.img} alt={c.logoAlt ?? ''} width={c.w} height={c.h} loading="lazy" />
+          </a>
+          <h3>{c.title}</h3>
+          <a class="btn btn-primary" href={c.href}>Read Case Study</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

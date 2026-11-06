@@ -1,0 +1,158 @@
+/* MSP and SaaS landing pages. Uses the site's fonts and blue palette. */
+.ml-wrap { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: 20px; }
+.ml-narrow { max-width: 860px; }
+.ml-sec { padding: 70px 0; }
+.ml-h2 { margin: 0 0 40px; font-size: 38px; font-weight: 600; line-height: 1.25; text-align: center; color: var(--text); }
+
+/* Hero: copy on the left, form card on the right */
+.ml-hero { padding: 70px 0; background: #070949; color: #fff; }
+.ml-hero-grid { display: grid; grid-template-columns: 1fr 480px; gap: 50px; align-items: center; }
+.ml-hero-text h1 { margin: 0 0 20px; font-size: 52px; font-weight: 600; line-height: 1.2; color: #fff; }
+.ml-hero-text p { margin: 0 0 30px; font-size: 22px; line-height: 1.4; }
+.ml-form-card.e-form { width: 100%; max-width: none; padding: 30px; background: #fff; color: var(--text); border-radius: 16px; }
+.ml-form-card h2 { margin: 0 0 20px; font-size: 28px; font-weight: 600; line-height: 1.2; text-align: center; color: var(--text); }
+
+/* Centred hero, no form (SaaS) */
+.ml-hero-center { padding: 100px 0; text-align: center; }
+.ml-hero-center .ml-hero-text { max-width: 900px; margin-inline: auto; }
+.ml-hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+.ml-hero-btns .btn { display: inline-flex; align-items: center; }
+.ml-hero-center .btn-primary { border: 3px solid #fff; }
+
+/* Logo band */
+.ml-logos { padding: 40px 0 20px; }
+.ml-logos-title { margin: 0 0 20px; font-size: 23px; font-weight: 500; line-height: 1.3; text-align: center; color: var(--text); }
+
+/* Intro */
+.ml-intro { padding-bottom: 30px; }
+.ml-checks { width: fit-content; max-width: 100%; margin: 0 auto; padding: 0; list-style: none; font-size: 20px; line-height: 1.5; }
+.ml-checks li { display: flex; gap: 12px; margin-bottom: 12px; }
+.ml-checks i { flex-shrink: 0; margin-top: 5px; color: var(--check); }
+
+/* Two-column service cards */
+.ml-service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.ml-service {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(7, 9, 73, .1);
+}
+.ml-service-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  margin-bottom: 20px;
+  font-size: 56px;
+  color: var(--blue);
+  background: var(--tint);
+  border-radius: 6px;
+}
+.ml-service h3 { margin: 0 0 12px; font-size: 24px; font-weight: 600; color: var(--text); }
+.ml-service p { margin: 0; font-size: 18px; line-height: 1.5; }
+
+/* Service cards with a round icon, centred and outlined (SaaS) */
+.ml-services-round .ml-service { align-items: center; padding: 30px 24px; text-align: center; border: 1px solid #d5d7e5; box-shadow: none; }
+.ml-services-round .ml-service-icon { width: 76px; height: 76px; margin-bottom: 18px; font-size: 30px; color: #fff; background: var(--blue); border-radius: 50%; }
+
+/* Alternating image and text rows */
+.ml-reasons { padding-top: 40px; }
+.ml-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 30px 0; }
+.ml-row:nth-of-type(even) .ml-row-text { order: 2; }
+.ml-row-text h3 { margin: 0 0 15px; font-size: 32px; font-weight: 600; line-height: 1.25; color: var(--text); }
+.ml-row-text p { margin: 0; font-size: 20px; line-height: 1.5; }
+.ml-row-img img { display: block; width: 100%; border-radius: 10px; }
+
+/* Testimonial cards */
+.ml-quote {
+  display: grid;
+  grid-template-columns: 44% 1fr;
+  gap: 36px;
+  align-items: center;
+  max-width: 1040px;
+  margin: 0 auto 44px;
+}
+.ml-quote-video { aspect-ratio: 16 / 9; }
+.ml-quote-video iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 8px; }
+.ml-quote-text { margin: 0 0 20px; font-size: 19px; line-height: 1.5; }
+.ml-quote-who { display: flex; align-items: center; gap: 14px; }
+.ml-quote-who img { flex-shrink: 0; width: 56px; height: 56px; object-fit: cover; border-radius: 50%; }
+.ml-quote-who strong { display: block; font-size: 18px; font-weight: 600; }
+.ml-quote-who span { display: block; font-size: 15px; line-height: 1.35; opacity: .85; }
+.ml-quote-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 1040px; margin-inline: auto; }
+.ml-quote-plain { display: block; margin: 0; }
+
+/* Results columns and stat tiles */
+.ml-impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.ml-impact-grid h3 { margin: 0 0 20px; font-size: 28px; font-weight: 600; line-height: 1.25; text-align: center; color: var(--text); }
+.ml-impact-grid ul { margin: 0; padding: 0; list-style: none; }
+.ml-impact-grid li { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; font-size: 18px; line-height: 1.4; }
+.ml-impact-grid i { flex-shrink: 0; font-size: 34px; color: var(--blue); }
+.ml-impact-grid.two { grid-template-columns: repeat(2, 1fr); max-width: 940px; margin-inline: auto; }
+.ml-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+.ml-stat { padding: 24px 16px; text-align: center; color: #fff; background: var(--blue); }
+.ml-stat strong { display: block; font-size: 42px; font-weight: 600; line-height: 1.2; }
+.ml-stat span { display: block; font-size: 18px; line-height: 1.35; }
+
+/* Case study cards */
+.ml-cases { padding-top: 20px; }
+.ml-case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.ml-case-grid.two { grid-template-columns: repeat(2, 1fr); max-width: 900px; margin-inline: auto; }
+.ml-case { display: flex; flex-direction: column; padding: 16px; border: 1px solid #d5d7e5; border-radius: 8px; }
+.ml-case-img img { display: block; width: 100%; border-radius: 4px; }
+.ml-case-logo { display: flex; align-items: center; justify-content: center; height: 110px; }
+.ml-case-logo img { width: auto; max-width: 60%; max-height: 70px; }
+.ml-case h3 { flex: 1; margin: 16px 0 20px; font-size: 22px; font-weight: 600; line-height: 1.3; color: var(--text); }
+.ml-case .btn { display: block; text-align: center; }
+
+/* Outlined FAQ list (SaaS) */
+.ml-faq-boxed .acc-item { border: 1px solid #d5d7e5; }
+.ml-faq-boxed .acc-item + .acc-item { border-top: 0; }
+.ml-faq-boxed .acc-title { font-weight: 500; line-height: 1.3; }
+.ml-faq-boxed .acc-content { padding-top: 0; }
+
+/* CTA band */
+.ml-band { padding: 70px 0; text-align: center; color: #fff; background: #070949; }
+.ml-band h2 { margin: 0 0 28px; font-size: 38px; font-weight: 600; line-height: 1.25; color: #fff; }
+
+/* Closing form */
+.ml-final { background: var(--tint); }
+.ml-final .ml-form-card { max-width: 640px; margin-inline: auto; }
+
+@media (max-width: 1024px) {
+  .ml-hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .ml-hero-text { text-align: center; }
+  .ml-hero-text h1 { font-size: 44px; }
+  .ml-form-card.e-form { max-width: 640px; margin-inline: auto; }
+  .ml-service-grid { gap: 16px; }
+  .ml-service { padding: 14px; }
+  .ml-service-icon { height: 110px; font-size: 44px; }
+  .ml-service h3 { font-size: 20px; }
+  .ml-service p { font-size: 16px; }
+  .ml-row { gap: 30px; }
+  .ml-impact-grid { gap: 24px; }
+  .ml-case-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 767px) {
+  .ml-sec, .ml-band, .ml-hero, .ml-hero-center { padding: 44px 0; }
+  .ml-h2, .ml-band h2 { margin-bottom: 26px; font-size: 28px; }
+  .ml-hero-text h1 { font-size: 32px; }
+  .ml-hero-text p { font-size: 19px; }
+  .ml-form-card.e-form { padding: 22px 18px; }
+  .ml-checks { font-size: 18px; }
+  .ml-service-grid, .ml-row, .ml-quote, .ml-quote-pair, .ml-impact-grid, .ml-stats, .ml-case-grid, .ml-case-grid.two { grid-template-columns: 1fr; }
+  .ml-row { gap: 18px; padding: 18px 0; }
+  .ml-row:nth-of-type(even) .ml-row-text { order: 0; }
+  .ml-row-text h3 { font-size: 25px; }
+  .ml-row-text p { font-size: 18px; }
+  .ml-quote { gap: 16px; margin-bottom: 32px; }
+  .ml-quote-text { font-size: 17px; }
+  .ml-stats { gap: 14px; margin-top: 20px; }
+  .ml-impact-grid.two { grid-template-columns: 1fr; }
+  .ml-impact-grid h3 { font-size: 24px; }
+  .ml-faq-boxed .acc-title { font-size: 19px; }
+  .ml-faq-boxed .acc-content { font-size: 17px; }
+}

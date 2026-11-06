@@ -1,8 +1,16 @@
 ---
-// SaaS landing page: the homepage layout and copy, aimed only at SaaS companies.
-// Logos, testimonials and case studies come from riseoak.com/b2b-saas-seo/.
-// No blog section: every imported post is about MSPs.
-import LandingPage from '../components/LandingPage.astro';
+// SaaS landing page: homepage copy aimed only at SaaS companies, in a centred, service-led
+// sales layout. Logos, testimonials and results come from riseoak.com/b2b-saas-seo/ and the
+// MicroStrategy and Relatient case studies.
+import Base from '../layouts/Base.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import LeadForm from '../components/LeadForm.astro';
+import LogoCarousel from '../components/LogoCarousel.astro';
+import SalesCaseStudies from '../components/SalesCaseStudies.astro';
+import SalesSteps from '../components/SalesSteps.astro';
+import SalesTestimonials from '../components/SalesTestimonials.astro';
+import { saasCardTestimonials, saasVideoTestimonials } from '../data/landing';
+import '../styles/sales-landing.css';
 
 const img = (p: string) => `/images/${p}`;
 
@@ -22,31 +30,18 @@ const painPoints = [
 ];
 
 const services = [
-  [
-    { icon: 'fa-paper-plane', title: 'Done-For-You Cold Email', text: 'We write, send, and manage cold email campaigns for your SaaS company.' },
-    { icon: 'fa-globe', title: 'Websites especially for SaaS', text: 'Websites designed to address the unique needs and challenges of SaaS companies.' },
-    { icon: 'fa-bahai', title: 'AI platform visibility', text: 'Increase visibility on ChatGPT and other AI answer platforms' },
-  ],
-  [
-    { icon: 'fa-map-marked-alt', title: 'Top search engine visibility', text: 'Boost organic traffic for industry-specific keywords that matter.' },
-    { icon: 'fa-pen-alt', title: 'Authority content creation', text: 'Produce expert content that positions your SaaS company as an industry leader.' },
-    { icon: 'fa-crown', title: 'Credibility from Inbound Links', text: "Elevate your site's authority by securing quality links from reputable sources." },
-  ],
+  { icon: 'fa-paper-plane', title: 'Done-For-You Cold Email', text: 'We write, send, and manage cold email campaigns for your SaaS company.' },
+  { icon: 'fa-globe', title: 'Websites especially for SaaS', text: 'Websites designed to address the unique needs and challenges of SaaS companies.' },
+  { icon: 'fa-bahai', title: 'AI platform visibility', text: 'Increase visibility on ChatGPT and other AI answer platforms' },
+  { icon: 'fa-map-marked-alt', title: 'Top search engine visibility', text: 'Boost organic traffic for industry-specific keywords that matter.' },
+  { icon: 'fa-pen-alt', title: 'Authority content creation', text: 'Produce expert content that positions your SaaS company as an industry leader.' },
+  { icon: 'fa-crown', title: 'Credibility from Inbound Links', text: "Elevate your site's authority by securing quality links from reputable sources." },
 ];
 
 const reasons = [
-  { lead: 'Proven Record with B2B SaaS:', text: 'Our extensive track record with B2B SaaS companies is backed by successful case studies.' },
-  { lead: 'Transparent Reporting:', text: 'Gain complete insight with our custom reporting in text and video.' },
-  { lead: 'Leading in AI and Tech:', text: 'We embrace cutting-edge tech for smarter, more effective campaigns.' },
-];
-
-const videoTestimonials = [
-  { video: 'd8nNMMX4Fb0', photo: img('2023/06/James-Kanka.jpg'), w: 199, h: 200, alt: 'James Kanka', name: 'James Kanka', role: 'VP of Marketing Relatient & NeuroFlow', quote: '“RiseOak is fantastic to work with and has helped us greatly in increasing our site’s organic traffic. Highly recommend”' },
-];
-
-const cardTestimonials = [
-  { quote: '"RiseOak helped us create SEO-driven article and backlinks. They’re very thorough in the planning and execution stages and very friendly. I highly recommend."', photo: img('2023/06/Ryan-Hersh.jpg'), alt: 'Ryan Hersh', name: 'Ryan Hersh', job: 'Director of Digital Marketing & SEO at MicroStrategy' },
-  { quote: '"RiseOak has made an immediate and significant impact on our SEO results."', photo: img('2023/06/Josh-Abich.jpg'), alt: 'Josh Abich', name: 'Josh Abich', job: 'Chief Revenue Officer' },
+  { lead: 'Proven Record with B2B SaaS', text: 'Our extensive track record with B2B SaaS companies is backed by successful case studies.', img: img('2023/06/Figure-2-Live-MicroStrategy-Article-1024x586.png'), w: 800, h: 458, alt: 'The MicroStrategy Enterprise Mobility Management page built from our article' },
+  { lead: 'Transparent Reporting', text: 'Gain complete insight with our custom reporting in text and video.', img: img('2023/06/Method-__-Content-Workbook-for-New-Content-1024x513.jpg'), w: 800, h: 401, alt: 'Content workbook tracking topics, keywords and traffic potential' },
+  { lead: 'Leading in AI and Tech', text: 'We embrace cutting-edge tech for smarter, more effective campaigns.', img: img('2026/09/MSP-Content-That-AI-Engines-Cite-img-1.jpg'), w: 750, h: 500, alt: 'Hands on a laptop with an AI graphic' },
 ];
 
 const faqs = [
@@ -56,43 +51,124 @@ const faqs = [
   { q: 'What is your process? What will you do?', a: 'We begin by ensuring that your web presence is optimized to attract and convert prospects. We have found that many SaaS companies we work with do not have this foundation in place. Next, we increase the authority of your web presence to attract and convert prospects who are searching for your software.' },
 ];
 
+// Figures come from the MicroStrategy and Relatient case studies.
+const impacts = [
+  { name: 'MicroStrategy', points: ['Page one of Google within two months for “Enterprise Mobility Management”', 'Ranked for related keywords such as “EMM technology”', 'Asked us to run a similar campaign for two more articles'] },
+  { name: 'Relatient', points: ['55.96% year-over-year increase in organic traffic', '16.60% increase in demo requests from organic traffic', 'Sites linking to Relatient grew from 83 to 283'] },
+];
+
 const cases = [
-  {
-    href: '/case-study-microstrategy/',
-    logo: img('2023/09/Microstrategy-logo.jpg'), w: 500, h: 81, alt: 'MicroStrategy logo', logoClass: 'wide',
-    title: 'Using Authority Content and Rankings to Become a Thought Leader Online',
-  },
-  {
-    href: '/case-study-relatient/',
-    logo: img('2023/09/Relatient-logo.png'), w: 300, h: 81, alt: 'Relatient logo', logoClass: 'narrow',
-    title: 'Year-over-year increase in organic traffic by 55.96% and increase in demo requests from organic traffic by 16.60%',
-  },
+  { href: '/case-study-microstrategy/', title: 'Using Authority Content and Rankings to Become a Thought Leader Online', img: img('2023/09/Microstrategy-logo.jpg'), w: 500, h: 81, logoAlt: 'MicroStrategy logo' },
+  { href: '/case-study-relatient/', title: 'Year-over-year increase in organic traffic by 55.96% and increase in demo requests from organic traffic by 16.60%', img: img('2023/09/Relatient-logo.png'), w: 300, h: 81, logoAlt: 'Relatient logo' },
 ];
 ---
-<LandingPage
+<Base
   title="B2B SaaS Marketing Agency | RiseOak"
   description="Seeking a marketing agency for your B2B SaaS company? Dive into our expert digital marketing solutions tailored for B2B SaaS companies."
-  h1="Digital Marketing Agency for B2B SaaS Companies"
-  logosHeading="Some SaaS Companies We've Helped"
-  logos={logos}
-  painHeading="Frustrated with options to grow your SaaS company online?"
-  painPoints={painPoints}
-  services={services}
-  reasons={reasons}
-  aiCtaHeading="Get Ahead While Most SaaS Companies Are Still Watching"
-  resultsHeading="Results, Not Hype: We've Supported SaaS Companies Like Yours"
-  videoTestimonials={videoTestimonials}
-  cardTestimonials={cardTestimonials}
-  ctaSubject="SaaS company"
-  faqs={faqs}
 >
-  <div slot="case-studies" class="saas-cases">
-    {cases.map((c) => (
-      <article class="saas-case">
-        <img class={c.logoClass} src={c.logo} alt={c.alt} width={c.w} height={c.h} loading="lazy" />
-        <h3>{c.title}</h3>
-        <a class="btn btn-outline" href={c.href}>Read Case Study</a>
-      </article>
-    ))}
-  </div>
-</LandingPage>
+  <section class="ml-hero ml-hero-center">
+    <div class="ml-wrap">
+      <div class="ml-hero-text">
+        <h1>Digital Marketing Agency for B2B SaaS Companies</h1>
+        <p>Harness the Power of AI and Data-Driven Marketing</p>
+        <div class="ml-hero-btns">
+          <a class="btn btn-primary" href="#apply">Apply For Consultation</a>
+          <a class="btn btn-outline" href="/msp-ai-pilot/">Free AI Visibility Pilot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ml-logos">
+    <div class="ml-wrap">
+      <h2 class="ml-logos-title">Some SaaS Companies We've Helped</h2>
+      <LogoCarousel slides={logos} />
+    </div>
+  </section>
+
+  <section class="ml-sec ml-intro">
+    <div class="ml-wrap ml-narrow">
+      <h2 class="ml-h2">Frustrated with options to grow your SaaS company online?</h2>
+      <ul class="ml-checks">
+        {painPoints.map((text) => (
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>{text}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="ml-sec ml-services ml-services-round">
+    <div class="ml-wrap">
+      <h2 class="ml-h2">Leverage our specialized digital marketing solutions to drive revenue</h2>
+      <div class="ml-service-grid">
+        {services.map((s) => (
+          <article class="ml-service">
+            <div class="ml-service-icon"><i class={`fas ${s.icon}`} aria-hidden="true"></i></div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ml-sec ml-reasons">
+    <div class="ml-wrap">
+      <h2 class="ml-h2">Reasons We're Your Best Choice</h2>
+      {reasons.map((r) => (
+        <div class="ml-row">
+          <div class="ml-row-text">
+            <h3>{r.lead}</h3>
+            <p>{r.text}</p>
+          </div>
+          <div class="ml-row-img"><img src={r.img} alt={r.alt} width={r.w} height={r.h} loading="lazy" /></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="ml-sec faq">
+    <div class="ml-wrap ml-narrow ml-faq-boxed">
+      <h2 class="ml-h2">FAQs</h2>
+      <FaqAccordion faqs={faqs} />
+    </div>
+  </section>
+
+  <section class="ml-band">
+    <div class="ml-wrap">
+      <h2>Get Ahead While Most SaaS Companies Are Still Watching</h2>
+      <a class="btn btn-outline" href="/msp-ai-visibility-roadmap/">Free AI Visibility Pilot</a>
+    </div>
+  </section>
+
+  <SalesTestimonials heading="Results, Not Hype: We've Supported SaaS Companies Like Yours" videos={saasVideoTestimonials} cards={saasCardTestimonials} />
+
+  <SalesCaseStudies cases={cases} />
+
+  <section class="ml-sec ml-impact">
+    <div class="ml-wrap">
+      <h2 class="ml-h2">What Our Work Has Delivered</h2>
+      <div class="ml-impact-grid two">
+        {impacts.map((c) => (
+          <div>
+            <h3>{c.name}</h3>
+            <ul>
+              {c.points.map((p) => <li><i class="fas fa-chart-line" aria-hidden="true"></i><span>{p}</span></li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <SalesSteps />
+
+  <section class="ml-sec ml-final" id="apply">
+    <div class="ml-wrap">
+      <h2 class="ml-h2">Ready to elevate your SaaS company with proven<br /> Digital Marketing Strategies?</h2>
+      <div class="ml-form-card e-form">
+        <LeadForm name="saas-landing" submitLabel="Apply For Consultation" />
+      </div>
+    </div>
+  </section>
+</Base>

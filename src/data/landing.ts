@@ -28,3 +28,20 @@ export const cardTestimonials = [
   { quote: '"We have closed some large deals based on leads coming from SEO. The majority of the Qualified inbound leads come from Google Search and SEO. Thanks, RiseOak for helping us with SEO"', photo: img('2023/06/Holly-Dowden.jpg'), alt: 'Holly-Dowden', name: 'Holly Dowden', job: 'VP, Marketing Ntiva' },
   { quote: '"Working with RiseOak has been a very positive experience for my team. We were especially pleased with the quality of work and responsiveness. Already, in just a few short weeks, we are seeing a difference in our rankings. I highly recommend working with RiseOak."', photo: img('2023/06/Jonathan.jpeg'), alt: 'Marketing Director, TCG Network Services', name: 'Jonathan Browning', job: 'Marketing Director, TCG Network Services', tight: true },
 ];
+
+// From riseoak.com/b2b-saas-seo/. Used by the SaaS landing page and the homepage.
+export const saasVideoTestimonials = [
+  { video: 'd8nNMMX4Fb0', photo: img('2023/06/James-Kanka.jpg'), w: 199, h: 200, alt: 'James Kanka', name: 'James Kanka', role: 'VP of Marketing Relatient & NeuroFlow', quote: '“RiseOak is fantastic to work with and has helped us greatly in increasing our site’s organic traffic. Highly recommend”' },
+];
+
+export const saasCardTestimonials = [
+  { quote: '"RiseOak helped us create SEO-driven article and backlinks. They’re very thorough in the planning and execution stages and very friendly. I highly recommend."', photo: img('2023/06/Ryan-Hersh.jpg'), alt: 'Ryan Hersh', name: 'Ryan Hersh', job: 'Director of Digital Marketing & SEO at MicroStrategy' },
+  { quote: '"RiseOak has made an immediate and significant impact on our SEO results."', photo: img('2023/06/Josh-Abich.jpg'), alt: 'Josh Abich', name: 'Josh Abich', job: 'Chief Revenue Officer' },
+];
+
+export const steps = [
+  { img: img('2023/11/1.png'), alt: '', title: 'Apply for consultation', text: 'Submit information for our initial evaluation.' },
+  { img: img('2023/11/2.png'), alt: '', title: 'Initial Consultation', text: 'An initial analysis and collection of more data.' },
+  { img: img('2023/11/3.png'), alt: 'number 3', title: 'Strategy session', text: 'Deep dive into your customized growth strategy.' },
+  { img: img('2023/11/4.png'), alt: '', title: 'Onboarding', text: 'Kickoff call and smooth transition.' },
+];

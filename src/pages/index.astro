@@ -1,7 +1,7 @@
 ---
 // Homepage: B2B tech positioning. Layout lives in LandingPage.astro.
 import LandingPage from '../components/LandingPage.astro';
-import { cardTestimonials, videoTestimonials } from '../data/landing';
+import { cardTestimonials, saasCardTestimonials, saasVideoTestimonials, videoTestimonials } from '../data/landing';
 
 const img = (p: string) => `/images/${p}`;
 
@@ -43,7 +43,7 @@ const services = [
 ];
 
 const reasons = [
-  { lead: 'Proven Record with B2B Tech:', text: 'Our extensive track record with MSPs and other B2B tech companies is backed by successful case studies.' },
+  { lead: 'Proven Record with B2B Tech Solutions:', text: 'Our extensive track record with MSPs and other B2B tech companies is backed by successful case studies.' },
   { lead: 'Transparent Reporting:', text: 'Gain complete insight with our custom reporting in text and video.' },
   { lead: 'Leading in AI and Tech:', text: 'We embrace cutting-edge tech for smarter, more effective campaigns.' },
 ];
@@ -62,15 +62,15 @@ const faqs = [
   industryLinks
   logosHeading="Some Companies We've Helped"
   logos={logos}
-  painHeading="Frustrated with options to grow your tech company online?"
+  painHeading="Frustrated with options to grow your company online?"
   painPoints={painPoints}
   services={services}
   reasons={reasons}
   aiCtaHeading="Get Ahead While Most Tech Companies Are Still Watching"
   resultsHeading="Results, Not Hype: We've Supported Companies Like Yours"
-  videoTestimonials={videoTestimonials}
-  cardTestimonials={cardTestimonials}
+  videoTestimonials={[...videoTestimonials, ...saasVideoTestimonials]}
+  cardTestimonials={[...cardTestimonials, ...saasCardTestimonials]}
   ctaSubject="tech company"
   faqs={faqs}
-  academyHeading="B2B Tech Marketing Academy"
+  academyHeading="Latest Thinking"
 />

@@ -1,8 +1,10 @@
 ---
-// Homepage layout (Elementor page 984), shared by / and the MSP and SaaS landing pages.
-// Each page supplies its own copy; only the steps and the blog-post lookup live here.
+// Homepage layout (Elementor page 984). The page supplies its own copy; only the steps and
+// the blog-post lookup live here.
 import Base from '../layouts/Base.astro';
+import FaqAccordion from './FaqAccordion.astro';
 import LogoCarousel from './LogoCarousel.astro';
+import { steps } from '../data/landing';
 import { getSortedPosts } from '../lib/posts';
 
 interface Props {
@@ -35,15 +37,6 @@ const {
   services, reasons, aiCtaHeading, resultsHeading, videoTestimonials, cardTestimonials,
   ctaSubject, faqs, academyHeading,
 } = Astro.props;
-
-const img = (p: string) => `/images/${p}`;
-
-const steps = [
-  { img: img('2023/11/1.png'), alt: '', title: 'Apply for consultation', text: 'Submit information for our initial evaluation.' },
-  { img: img('2023/11/2.png'), alt: '', title: 'Initial Consultation', text: 'An initial analysis and collection of more data.' },
-  { img: img('2023/11/3.png'), alt: 'number 3', title: 'Strategy session', text: 'Deep dive into your customized growth strategy.' },
-  { img: img('2023/11/4.png'), alt: '', title: 'Onboarding', text: 'Kickoff call and smooth transition.' },
-];
 
 // The two newest posts, as on the live site.
 const posts = (await getSortedPosts()).slice(0, 2).map((p) => ({
@@ -278,19 +271,6 @@ const posts = (await getSortedPosts()).slice(0, 2).map((p) => ({
     </div>
   </section>
 
-  {Astro.slots.has('case-studies') && (
-    <section class="lp-cases bg-white">
-      <div class="container">
-        <div class="col">
-          <div class="wrap">
-            <div class="widget t-center"><h2 class="title sec-h2">Case Studies</h2></div>
-          </div>
-        </div>
-      </div>
-      <slot name="case-studies" />
-    </section>
-  )}
-
   <!-- 9. Steps -->
   <section class="steps bg-white">
     <div class="container">
@@ -341,17 +321,7 @@ const posts = (await getSortedPosts()).slice(0, 2).map((p) => ({
             <div class="container faq-inner">
               <div class="col">
                 <div class="wrap">
-                  <div class="widget accordion">
-                    {faqs.map((f, i) => (
-                      <div class:list={['acc-item', { active: i === 0 }]}>
-                        <button class="acc-title" type="button" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`faq-${i}`} id={`faq-title-${i}`}>
-                          <span class="acc-icon" aria-hidden="true"><i class="fas fa-caret-right closed"></i><i class="fas fa-caret-down opened"></i></span>
-                          {f.q}
-                        </button>
-                        <div class="acc-content" id={`faq-${i}`} role="region" aria-labelledby={`faq-title-${i}`}><p>{f.a}</p></div>
-                      </div>
-                    ))}
-                  </div>
+                  <FaqAccordion faqs={faqs} />
                 </div>
               </div>
             </div>
@@ -387,23 +357,3 @@ const posts = (await getSortedPosts()).slice(0, 2).map((p) => ({
     </div>
   </section>}
 </Base>
-
-<script>
-  // Elementor accordion: one panel open at a time, clicking the open one closes it.
-  document.querySelectorAll<HTMLElement>('.accordion').forEach((acc) => {
-    acc.querySelectorAll<HTMLButtonElement>('.acc-title').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.acc-item')!;
-        const wasOpen = item.classList.contains('active');
-        acc.querySelectorAll('.acc-item').forEach((el) => {
-          el.classList.remove('active');
-          el.querySelector('.acc-title')!.setAttribute('aria-expanded', 'false');
-        });
-        if (!wasOpen) {
-          item.classList.add('active');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  });
-</script>

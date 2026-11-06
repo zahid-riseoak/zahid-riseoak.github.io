@@ -1,0 +1,47 @@
+---
+// Video and written testimonials for the MSP and SaaS landing pages.
+interface Props {
+  heading: string;
+  videos: { video: string; photo: string; alt: string; name: string; role: string; quote: string }[];
+  cards: { quote: string; photo: string; alt: string; name: string; job: string }[];
+}
+const { heading, videos, cards } = Astro.props;
+---
+<section class="ml-sec ml-testimonials">
+  <div class="ml-wrap">
+    <h2 class="ml-h2">{heading}</h2>
+    {videos.map((t) => (
+      <article class="ml-quote">
+        <div class="ml-quote-video">
+          <iframe
+            src={`https://www.youtube.com/embed/${t.video}?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0&enablejsapi=1`}
+            title={`${t.name} testimonial`}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="ml-quote-body">
+          <p class="ml-quote-text">{t.quote}</p>
+          <div class="ml-quote-who">
+            <img src={t.photo} alt={t.alt} width="56" height="56" loading="lazy" />
+            <div><strong>{t.name}</strong><span>{t.role}</span></div>
+          </div>
+        </div>
+      </article>
+    ))}
+    <div class="ml-quote-pair">
+      {cards.map((t) => (
+        <article class="ml-quote ml-quote-plain">
+          <div class="ml-quote-body">
+            <p class="ml-quote-text">{t.quote}</p>
+            <div class="ml-quote-who">
+              <img src={t.photo} alt={t.alt} width="56" height="56" loading="lazy" />
+              <div><strong>{t.name}</strong><span>{t.job}</span></div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

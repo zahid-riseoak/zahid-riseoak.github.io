@@ -7,10 +7,12 @@ interface Props {
   alt: string;
   name: string;
   title: string;
+  /** Full-width bubble, for long quotes. */
+  wide?: boolean;
 }
-const { text, photo, alt, name, title } = Astro.props;
+const { text, photo, alt, name, title, wide } = Astro.props;
 ---
-<div class="bubble-slider" role="region" aria-roledescription="carousel" aria-label="Slides">
+<div class:list={['bubble-slider', { wide }]} role="region" aria-roledescription="carousel" aria-label="Slides">
   <div class="bubble-slide" role="group" aria-roledescription="slide">
     <div class="bubble">
       <div class="bubble-content">

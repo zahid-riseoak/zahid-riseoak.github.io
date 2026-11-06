@@ -176,6 +176,7 @@
   .post-author { padding: 2px 0; font-size: 15px; }
   .post-main { margin-top: 0; padding: 20px 20px 0; }
   .post-body { font-size: 18px; }
+  .post-body table { display: block; overflow-x: auto; }
   .post-body .post-cta { padding: 40px 15px 30px; }
   .post-body .post-cta-title { font-size: 21px; line-height: 1.2em; }
   .post-body .post-cta-btn { font-size: 15px; }

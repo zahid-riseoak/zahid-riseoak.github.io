@@ -1,0 +1,75 @@
+---
+// MSP landing page: copy from the live riseoak.com homepage, MSP only.
+import LandingPage from '../components/LandingPage.astro';
+import { cardTestimonials, mspLogos, videoTestimonials } from '../data/landing';
+
+const painPoints = [
+  "Don't know what really works for MSP marketing?",
+  'Struggling to attract high-quality leads?',
+  'Tired of spending on marketing but not seeing an ROI?',
+  'Suffering from poor visibility on search engines?',
+];
+
+const services = [
+  [
+    { icon: 'fa-paper-plane', title: 'Done-For-You Cold Email', text: 'We write, send, and manage cold email campaigns for your MSP.' },
+    { icon: 'fa-globe', title: 'Websites especially for MSPs', text: 'Websites designed to address the unique needs and challenges of MSPs.' },
+    { icon: 'fa-bahai', title: 'AI platform visibility', text: 'Increase visibility on ChatGPT and other AI answer platforms' },
+  ],
+  [
+    { icon: 'fa-map-marked-alt', title: 'Top search engine visibility', text: 'Boost organic traffic for industry-specific keywords that matter.' },
+    { icon: 'fa-pen-alt', title: 'Authority content creation', text: 'Produce expert content that positions your MSP as an industry leader.' },
+    { icon: 'fa-crown', title: 'Credibility from Inbound Links', text: "Elevate your site's authority by securing quality links from reputable sources." },
+  ],
+];
+
+const reasons = [
+  { lead: 'Proven Record with MSPs:', text: 'Our extensive track record with MSPs is backed by successful case studies.' },
+  { lead: 'Transparent Reporting:', text: 'Gain complete insight with our custom reporting in text and video.' },
+  { lead: 'Leading in AI and Tech:', text: 'We embrace cutting-edge tech for smarter, more effective campaigns.' },
+];
+
+const faqs = [
+  { q: 'Will this work for my MSP?', a: 'If you are an MSP that is just getting started, we can help you set up your online presence. However, our process is best suited for MSPs that are somewhat established, with a proven track record and already investing in different forms of marketing.' },
+  { q: 'How long does it take?', a: 'We have found that the more established your MSP is, the faster we can generate results for you. In most cases, we can show tangible results within the first two months.' },
+  { q: 'What is you process? What will you do?', a: 'We begin by ensuring that your web presence is optimized to attract and convert prospects. We have found that many MSPs we work with do not have this foundation in place. Next, we increase the authority of your web presence to attract and convert local prospects who are searching for Managed IT Services.' },
+];
+
+const cases = [
+  { href: '/proof-case-studies-powersolution/', img: '/images/2026/02/Powersolution-case-study-thumbnail-img-1.jpg', alt: 'Powersolution case study' },
+  { href: '/proof-case-studies-ntiva/', img: '/images/2024/09/ssffsf-2.jpg', alt: 'Ntiva case study' },
+  { href: '/proof-case-studies-tcg-network-services/', img: '/images/2024/09/ssffsf-5.jpg', alt: 'TCG Network Services case study' },
+];
+---
+<LandingPage
+  title="MSP Marketing Agency | RiseOak"
+  description="Seeking a marketing agency for your MSP? Dive into our expert digital marketing solutions tailored for MSPs."
+  h1="MSP Digital Marketing Agency for Exponential Growth"
+  logosHeading="Some MSPs We've Helped"
+  logos={mspLogos}
+  painHeading="Frustrated with options to grow your MSP online?"
+  painPoints={painPoints}
+  services={services}
+  reasons={reasons}
+  aiCtaHeading="Get Ahead While Most MSPs Are Still Watching"
+  resultsHeading="Results, Not Hype: We've Supported MSPs Like You"
+  videoTestimonials={videoTestimonials}
+  cardTestimonials={cardTestimonials}
+  ctaSubject="MSP"
+  faqs={faqs}
+  academyHeading="MSP Marketing Academy"
+>
+  <div slot="case-studies" class="wins-cases">
+    <div class="container">
+      {cases.map((c) => (
+        <div class="col c33">
+          <div class="wrap">
+            <div class="widget">
+              <a class="case-card" href={c.href}><img src={c.img} alt={c.alt} width="750" height="500" loading="lazy" /></a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</LandingPage>

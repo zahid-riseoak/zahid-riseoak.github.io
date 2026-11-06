@@ -1,7 +1,19 @@
 ---
 // Elementor header 2521 (desktop + tablet/mobile bars) and popup 2517 (off-canvas menu).
-const nav = [
+interface NavItem {
+  label: string;
+  href?: string;
+  children?: { label: string; href: string }[];
+}
+const nav: NavItem[] = [
   { label: 'Wins', href: '/wins/' },
+  {
+    label: 'Industries',
+    children: [
+      { label: 'MSP', href: '/msp-digital-marketing/' },
+      { label: 'SaaS', href: '/saas-digital-marketing/' },
+    ],
+  },
   { label: 'About', href: '/about-us-msp/' },
 ];
 const logo = '/images/2023/06/RiseOak-Logo.png';
@@ -20,7 +32,16 @@ const logo = '/images/2023/06/RiseOak-Logo.png';
         <div class="wrap">
           <nav class="widget main-nav" aria-label="Menu">
             <ul>
-              {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+              {nav.map((item) => item.children ? (
+                <li class="has-sub">
+                  <button class="nav-parent" type="button" aria-expanded="false">{item.label}<i class="fas fa-caret-down" aria-hidden="true"></i></button>
+                  <ul class="nav-sub">
+                    {item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+                  </ul>
+                </li>
+              ) : (
+                <li><a href={item.href}>{item.label}</a></li>
+              ))}
             </ul>
           </nav>
           <div class="widget hdr-btn-wrap-1">
@@ -64,7 +85,16 @@ const logo = '/images/2023/06/RiseOak-Logo.png';
       <div class="popup-links">
         <nav class="popup-nav" aria-label="Mobile menu">
           <ul>
-            {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+            {nav.map((item) => item.children ? (
+              <li>
+                <span class="popup-parent">{item.label}</span>
+                <ul class="popup-sub">
+                  {item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+                </ul>
+              </li>
+            ) : (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))}
           </ul>
         </nav>
         <div><a class="btn btn-primary" href="/apply-free-consultation/">Apply For Consultation</a></div>
@@ -86,4 +116,20 @@ const logo = '/images/2023/06/RiseOak-Logo.png';
   popup.querySelector('.popup-close')!.addEventListener('click', () => setOpen(false));
   popup.addEventListener('click', (e) => { if (e.target === popup) setOpen(false); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+  // Desktop dropdowns open on hover via CSS; click covers touch screens and keyboards.
+  const parents = document.querySelectorAll<HTMLButtonElement>('.nav-parent');
+  const setSub = (btn: HTMLButtonElement, open: boolean) => {
+    btn.setAttribute('aria-expanded', String(open));
+    btn.parentElement!.classList.toggle('open', open);
+  };
+  parents.forEach((btn) => {
+    btn.addEventListener('click', () => setSub(btn, btn.getAttribute('aria-expanded') !== 'true'));
+  });
+  document.addEventListener('click', (e) => {
+    parents.forEach((btn) => { if (!btn.parentElement!.contains(e.target as Node)) setSub(btn, false); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') parents.forEach((btn) => setSub(btn, false));
+  });
 </script>

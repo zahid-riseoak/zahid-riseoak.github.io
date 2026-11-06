@@ -1,0 +1,409 @@
+---
+// Homepage layout (Elementor page 984), shared by / and the MSP and SaaS landing pages.
+// Each page supplies its own copy; only the steps and the blog-post lookup live here.
+import Base from '../layouts/Base.astro';
+import LogoCarousel from './LogoCarousel.astro';
+import { getSortedPosts } from '../lib/posts';
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  /** Show the "MSP | SaaS" links under the subheading. */
+  industryLinks?: boolean;
+  logosHeading: string;
+  logos: { src: string; label: string; fit?: boolean }[];
+  painHeading: string;
+  painPoints: string[];
+  services: { icon: string; title: string; text: string }[][];
+  reasons: { lead: string; text: string }[];
+  aiCtaHeading: string;
+  resultsHeading: string;
+  videoTestimonials: {
+    video: string; photo: string; w: number; h: number; alt: string;
+    name: string; role: string; quote: string; photoWidth?: string;
+  }[];
+  cardTestimonials: { quote: string; photo: string; alt: string; name: string; job: string; tight?: boolean }[];
+  /** Filled into "Ready to elevate your ___ with proven Digital Marketing Strategies?". */
+  ctaSubject: string;
+  faqs: { q: string; a: string }[];
+  /** Omit to leave out the blog section. */
+  academyHeading?: string;
+}
+const {
+  title, description, h1, industryLinks = false, logosHeading, logos, painHeading, painPoints,
+  services, reasons, aiCtaHeading, resultsHeading, videoTestimonials, cardTestimonials,
+  ctaSubject, faqs, academyHeading,
+} = Astro.props;
+
+const img = (p: string) => `/images/${p}`;
+
+const steps = [
+  { img: img('2023/11/1.png'), alt: '', title: 'Apply for consultation', text: 'Submit information for our initial evaluation.' },
+  { img: img('2023/11/2.png'), alt: '', title: 'Initial Consultation', text: 'An initial analysis and collection of more data.' },
+  { img: img('2023/11/3.png'), alt: 'number 3', title: 'Strategy session', text: 'Deep dive into your customized growth strategy.' },
+  { img: img('2023/11/4.png'), alt: '', title: 'Onboarding', text: 'Kickoff call and smooth transition.' },
+];
+
+// The two newest posts, as on the live site.
+const posts = (await getSortedPosts()).slice(0, 2).map((p) => ({
+  href: `/${p.id}/`,
+  img: p.data.featuredImage,
+  alt: p.data.featuredImageAlt,
+  title: p.data.title,
+}));
+---
+<Base title={title} description={description}>
+  <!-- 1. Hero -->
+  <section class="hero bg-white">
+    <div class="container">
+      <div class="col">
+        <div class="wrap center">
+          <div class="widget t-center">
+            <h1 class="title">{h1}</h1>
+          </div>
+          <div class="widget t-center hero-sub">
+            <h2 class="title">Harness the Power of AI and Data-Driven Marketing</h2>
+          </div>
+          {industryLinks && (
+            <nav class="widget hero-links" aria-label="Who we work with">
+              <a href="/msp-digital-marketing/">MSP</a>
+              <span aria-hidden="true">|</span>
+              <a href="/saas-digital-marketing/">SaaS</a>
+            </nav>
+          )}
+          <div class="widget">
+            <div class="container hero-btns">
+              <div class="col c50">
+                <div class="wrap">
+                  <div class="widget align-right"><a class="btn btn-primary" href="/consultation/">Apply For Consultation</a></div>
+                </div>
+              </div>
+              <div class="col c50">
+                <div class="wrap center">
+                  <div class="widget align-left"><a class="btn btn-outline" href="/msp-ai-pilot/">Free AI Visibility Pilot</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Client logos -->
+  <section class="logos bg-white">
+    <div class="container">
+      <div class="col">
+        <div class="wrap center">
+          <div class="widget t-center logos-heading"><h3 class="title">{logosHeading}</h3></div>
+          <div class="widget"><LogoCarousel slides={logos} /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Pain points -->
+  <section class="pain bg-tint">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">{painHeading}</h2></div>
+          <div class="widget">
+            <div class="container pain-list">
+              <div class="col">
+                <div class="wrap">
+                  <div class="widget">
+                    <ul class="icon-list">
+                      {painPoints.map((text) => (
+                        <li><span class="ico"><i class="fas fa-check-circle" aria-hidden="true"></i></span><span class="txt">{text}</span></li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Services -->
+  <section class="services bg-white">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">Leverage our specialized digital marketing solutions to drive revenue</h2></div>
+          <div class="widget">
+            {services.map((row) => (
+              <div class="container row">
+                {row.map((s) => (
+                  <div class="col c33">
+                    <div class="wrap service-card">
+                      <div class="widget icon-box">
+                        <div class="ib-icon"><i class={`fas ${s.icon}`} aria-hidden="true"></i></div>
+                        <div class="ib-content">
+                          <h3>{s.title}</h3>
+                          <p>{s.text}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Reasons -->
+  <section class="reasons bg-tint">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">Reasons We're Your Best Choice</h2></div>
+          <div class="widget">
+            <div class="container reasons-list">
+              <div class="col">
+                <div class="wrap">
+                  <div class="widget">
+                    <ul class="icon-list">
+                      {reasons.map((r) => (
+                        <li><span class="ico"><i class="fas fa-check-circle" aria-hidden="true"></i></span><span class="txt"><strong>{r.lead}</strong> {r.text}</span></li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. AI visibility CTA -->
+  <section class="ai-cta bg-white">
+    <div class="container">
+      <div class="col">
+        <div class="wrap center">
+          <div class="widget t-center"><h2 class="title sec-h2">{aiCtaHeading}</h2></div>
+          <div class="widget t-center"><a class="btn btn-outline" href="/msp-ai-visibility-roadmap/">Free AI Visibility Pilot</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Results heading + video testimonials -->
+  <section class="results-head bg-tint">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">{resultsHeading}</h2></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {videoTestimonials.map((t) => (
+    <section class="vt bg-tint">
+      <div class="container">
+        <div class="col c50">
+          <div class="wrap">
+            <div class="widget video">
+              <iframe
+                src={`https://www.youtube.com/embed/${t.video}?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0&enablejsapi=1`}
+                title={`${t.name} testimonial`}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="col c50">
+          <div class="wrap">
+            <div class="widget">
+              <div class="container">
+                <div class="col vt-photo" style={t.photoWidth ? `width:${t.photoWidth}` : undefined}>
+                  <div class="wrap">
+                    <div class="widget"><img src={t.photo} alt={t.alt} width={t.w} height={t.h} loading="lazy" /></div>
+                  </div>
+                </div>
+                <div class="col vt-text">
+                  <div class="wrap">
+                    <div class="widget vt-quote"><p>{t.quote}</p></div>
+                    <div class="widget vt-name"><h3 class="title">{t.name}</h3></div>
+                    <div class="widget vt-role"><p>{t.role}</p></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- 8. Card testimonials -->
+  <section class="cards bg-tint">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget">
+            <div class="container cards-row">
+              {cardTestimonials.map((t) => (
+                <div class="col c50">
+                  <div class="wrap t-card">
+                    <div class="widget testimonial">
+                      <div class="testimonial-content">{t.quote}</div>
+                      <div class="testimonial-meta">
+                        <div class="testimonial-image"><img src={t.photo} alt={t.alt} width="55" height="55" loading="lazy" /></div>
+                        <div class="testimonial-details">
+                          <div class="testimonial-name">{t.name}</div>
+                          <div class:list={['testimonial-job', { tight: t.tight }]}>{t.job}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {Astro.slots.has('case-studies') && (
+    <section class="lp-cases bg-white">
+      <div class="container">
+        <div class="col">
+          <div class="wrap">
+            <div class="widget t-center"><h2 class="title sec-h2">Case Studies</h2></div>
+          </div>
+        </div>
+      </div>
+      <slot name="case-studies" />
+    </section>
+  )}
+
+  <!-- 9. Steps -->
+  <section class="steps bg-white">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">Get Started in 4 Steps</h2></div>
+          <div class="widget">
+            <div class="container">
+              {steps.map((s, i) => (
+                <div class="col c25">
+                  <div class:list={['wrap step', { 'step-1': i === 0 }]}>
+                    <div class="widget image-box">
+                      <figure class="ib-img" style="margin-block:0;margin-inline:auto"><img src={s.img} alt={s.alt} width="100" height="100" loading="lazy" /></figure>
+                      <div class="ib-content">
+                        <h3>{s.title}</h3>
+                        <p>{s.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Final CTA -->
+  <section class="final-cta bg-white">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">Ready to elevate your {ctaSubject} with proven<br /> Digital Marketing Strategies?</h2></div>
+          <div class="widget t-center btn-wrap"><a class="btn btn-primary" href="/consultation/">Apply For Consultation</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. FAQs -->
+  <section class="faq bg-tint">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">FAQs</h2></div>
+          <div class="widget">
+            <div class="container faq-inner">
+              <div class="col">
+                <div class="wrap">
+                  <div class="widget accordion">
+                    {faqs.map((f, i) => (
+                      <div class:list={['acc-item', { active: i === 0 }]}>
+                        <button class="acc-title" type="button" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`faq-${i}`} id={`faq-title-${i}`}>
+                          <span class="acc-icon" aria-hidden="true"><i class="fas fa-caret-right closed"></i><i class="fas fa-caret-down opened"></i></span>
+                          {f.q}
+                        </button>
+                        <div class="acc-content" id={`faq-${i}`} role="region" aria-labelledby={`faq-title-${i}`}><p>{f.a}</p></div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Marketing Academy -->
+  {academyHeading && <section class="academy bg-white">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center academy-head"><h2 class="title">{academyHeading}</h2></div>
+          <div class="widget">
+            <div class="posts">
+              {posts.map((p) => (
+                <article class="post">
+                  <a class="post-thumb-link" href={p.href} tabindex="-1">
+                    <div class="post-thumb"><img src={p.img} alt={p.alt} width="750" height="500" loading="lazy" /></div>
+                  </a>
+                  <div class="post-text">
+                    <h3 class="post-title"><a href={p.href}>{p.title}</a></h3>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div class="widget t-center explore"><h3 class="title"><a href="/blog/">Explore All</a></h3></div>
+        </div>
+      </div>
+    </div>
+  </section>}
+</Base>
+
+<script>
+  // Elementor accordion: one panel open at a time, clicking the open one closes it.
+  document.querySelectorAll<HTMLElement>('.accordion').forEach((acc) => {
+    acc.querySelectorAll<HTMLButtonElement>('.acc-title').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.acc-item')!;
+        const wasOpen = item.classList.contains('active');
+        acc.querySelectorAll('.acc-item').forEach((el) => {
+          el.classList.remove('active');
+          el.querySelector('.acc-title')!.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  });
+</script>

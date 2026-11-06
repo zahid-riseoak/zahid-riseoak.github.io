@@ -6,25 +6,32 @@ import CaseStudyCards, { type Card } from '../components/CaseStudyCards.astro';
 import YouTube from '../components/YouTube.astro';
 
 interface Img { src: string; w: number; h: number; alt?: string }
-interface Quote { text: string; photo: string; alt: string; name: string; title: string }
+interface Quote { text: string; photo: string; alt: string; name: string; title: string; wide?: boolean }
 interface Props {
   meta: { title: string; description: string; robots?: string };
-  hero: { title: string; html: string; bg: string; shortOnMobile?: boolean };
+  /** panel: colour of the diagonal panel behind the hero text. */
+  hero: { title: string; html: string; bg: string; shortOnMobile?: boolean; panel?: string };
   overview: { html: string; logo: Img };
   testimonial: Quote;
   video?: string;
   summary: string;
+  /** Let the summary band fit its text instead of keeping the 90vh mobile minimum. */
+  compactSummary?: boolean;
   challenges: { html: string; minHeight?: number; size?: number };
   testimonial2?: Quote;
   video2?: string;
   method: { image: Img; html: string };
   results: { title: string; minHeight: number; image?: Img; intro?: string; pair?: [Img, Img]; html: string };
-  cards: Card[];
+  /** The SaaS case studies have no "more case studies" block. */
+  cards?: Card[];
 }
 const p = Astro.props;
 ---
 <Base title={p.meta.title} description={p.meta.description} robots={p.meta.robots}>
-  <section class:list={['cs-hero mid', { short: p.hero.shortOnMobile }]} style={`background-image:url('${p.hero.bg}')`}>
+  <section
+    class:list={['cs-hero mid', { short: p.hero.shortOnMobile, panel: p.hero.panel }]}
+    style={p.hero.panel ? `--bg:url('${p.hero.bg}');--panel:${p.hero.panel}` : `background-image:url('${p.hero.bg}')`}
+  >
     <div class="container">
       <div class="col">
         <div class="wrap">
@@ -72,7 +79,7 @@ const p = Astro.props;
     </section>
   )}
 
-  <section class="cs-summary cs-sec cs-peach mid">
+  <section class:list={['cs-summary cs-sec cs-peach mid', { compact: p.compactSummary }]}>
     <div class="container">
       <div class="col">
         <div class="wrap">
@@ -144,5 +151,5 @@ const p = Astro.props;
     </div>
   </section>
 
-  <CaseStudyCards cards={p.cards} />
+  {p.cards && <CaseStudyCards cards={p.cards} />}
 </Base>

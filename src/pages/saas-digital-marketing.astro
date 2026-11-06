@@ -1,0 +1,98 @@
+---
+// SaaS landing page: the homepage layout and copy, aimed only at SaaS companies.
+// Logos, testimonials and case studies come from riseoak.com/b2b-saas-seo/.
+// No blog section: every imported post is about MSPs.
+import LandingPage from '../components/LandingPage.astro';
+
+const img = (p: string) => `/images/${p}`;
+
+const logos = [
+  { src: img('2023/09/MicroStrategy-Logo.png'), label: 'MicroStrategy Logo', fit: true },
+  { src: img('2023/09/Relatient.png'), label: 'Relatient', fit: true },
+  { src: img('2023/09/RoundTrip.png'), label: 'RoundTrip logo', fit: true },
+  { src: img('2023/09/TravelBank-Logo.jpg'), label: 'TravelBank Logo', fit: true },
+  { src: img('2023/09/Neuroflow.png'), label: 'Neuroflow', fit: true },
+];
+
+const painPoints = [
+  "Don't know what really works for SaaS marketing?",
+  'Struggling to attract high-quality leads?',
+  'Tired of spending on marketing but not seeing an ROI?',
+  'Suffering from poor visibility on search engines?',
+];
+
+const services = [
+  [
+    { icon: 'fa-paper-plane', title: 'Done-For-You Cold Email', text: 'We write, send, and manage cold email campaigns for your SaaS company.' },
+    { icon: 'fa-globe', title: 'Websites especially for SaaS', text: 'Websites designed to address the unique needs and challenges of SaaS companies.' },
+    { icon: 'fa-bahai', title: 'AI platform visibility', text: 'Increase visibility on ChatGPT and other AI answer platforms' },
+  ],
+  [
+    { icon: 'fa-map-marked-alt', title: 'Top search engine visibility', text: 'Boost organic traffic for industry-specific keywords that matter.' },
+    { icon: 'fa-pen-alt', title: 'Authority content creation', text: 'Produce expert content that positions your SaaS company as an industry leader.' },
+    { icon: 'fa-crown', title: 'Credibility from Inbound Links', text: "Elevate your site's authority by securing quality links from reputable sources." },
+  ],
+];
+
+const reasons = [
+  { lead: 'Proven Record with B2B SaaS:', text: 'Our extensive track record with B2B SaaS companies is backed by successful case studies.' },
+  { lead: 'Transparent Reporting:', text: 'Gain complete insight with our custom reporting in text and video.' },
+  { lead: 'Leading in AI and Tech:', text: 'We embrace cutting-edge tech for smarter, more effective campaigns.' },
+];
+
+const videoTestimonials = [
+  { video: 'd8nNMMX4Fb0', photo: img('2023/06/James-Kanka.jpg'), w: 199, h: 200, alt: 'James Kanka', name: 'James Kanka', role: 'VP of Marketing Relatient & NeuroFlow', quote: '“RiseOak is fantastic to work with and has helped us greatly in increasing our site’s organic traffic. Highly recommend”' },
+];
+
+const cardTestimonials = [
+  { quote: '"RiseOak helped us create SEO-driven article and backlinks. They’re very thorough in the planning and execution stages and very friendly. I highly recommend."', photo: img('2023/06/Ryan-Hersh.jpg'), alt: 'Ryan Hersh', name: 'Ryan Hersh', job: 'Director of Digital Marketing & SEO at MicroStrategy' },
+  { quote: '"RiseOak has made an immediate and significant impact on our SEO results."', photo: img('2023/06/Josh-Abich.jpg'), alt: 'Josh Abich', name: 'Josh Abich', job: 'Chief Revenue Officer' },
+];
+
+const faqs = [
+  { q: 'Will this work for my SaaS company?', a: 'If your SaaS company is just getting started, we can help you set up your online presence. However, our process is best suited for SaaS companies that are somewhat established, with a proven track record and already investing in different forms of marketing.' },
+  { q: 'How long does it take?', a: 'Organic growth is a long-term investment. While some changes can lead to quick wins, substantial and sustainable growth typically takes 3-6 months. We provide monthly reports to track progress and make data-driven adjustments to the strategy.' },
+  { q: 'Are there long term contracts?', a: 'No. We strongly believe that our ongoing relationship should be based on continuous results. All of our contracts are on a month-to-month basis.' },
+  { q: 'What is your process? What will you do?', a: 'We begin by ensuring that your web presence is optimized to attract and convert prospects. We have found that many SaaS companies we work with do not have this foundation in place. Next, we increase the authority of your web presence to attract and convert prospects who are searching for your software.' },
+];
+
+const cases = [
+  {
+    href: '/case-study-microstrategy/',
+    logo: img('2023/09/Microstrategy-logo.jpg'), w: 500, h: 81, alt: 'MicroStrategy logo', logoClass: 'wide',
+    title: 'Using Authority Content and Rankings to Become a Thought Leader Online',
+  },
+  {
+    href: '/case-study-relatient/',
+    logo: img('2023/09/Relatient-logo.png'), w: 300, h: 81, alt: 'Relatient logo', logoClass: 'narrow',
+    title: 'Year-over-year increase in organic traffic by 55.96% and increase in demo requests from organic traffic by 16.60%',
+  },
+];
+---
+<LandingPage
+  title="B2B SaaS Marketing Agency | RiseOak"
+  description="Seeking a marketing agency for your B2B SaaS company? Dive into our expert digital marketing solutions tailored for B2B SaaS companies."
+  h1="Digital Marketing Agency for B2B SaaS Companies"
+  logosHeading="Some SaaS Companies We've Helped"
+  logos={logos}
+  painHeading="Frustrated with options to grow your SaaS company online?"
+  painPoints={painPoints}
+  services={services}
+  reasons={reasons}
+  aiCtaHeading="Get Ahead While Most SaaS Companies Are Still Watching"
+  resultsHeading="Results, Not Hype: We've Supported SaaS Companies Like Yours"
+  videoTestimonials={videoTestimonials}
+  cardTestimonials={cardTestimonials}
+  ctaSubject="SaaS company"
+  faqs={faqs}
+>
+  <div slot="case-studies" class="saas-cases">
+    {cases.map((c) => (
+      <article class="saas-case">
+        <img class={c.logoClass} src={c.logo} alt={c.alt} width={c.w} height={c.h} loading="lazy" />
+        <h3>{c.title}</h3>
+        <a class="btn btn-outline" href={c.href}>Read Case Study</a>
+      </article>
+    ))}
+  </div>
+</LandingPage>

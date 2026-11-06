@@ -1,8 +1,7 @@
 ---
-// Homepage — rebuild of Elementor page 984. Section order matches riseoak.com.
-import Base from '../layouts/Base.astro';
-import LogoCarousel from '../components/LogoCarousel.astro';
-import { getSortedPosts } from '../lib/posts';
+// Homepage: B2B tech positioning. Layout lives in LandingPage.astro.
+import LandingPage from '../components/LandingPage.astro';
+import { cardTestimonials, videoTestimonials } from '../data/landing';
 
 const img = (p: string) => `/images/${p}`;
 
@@ -10,16 +9,21 @@ const logos = [
   { src: img('2023/09/Untitled-design-5.png'), label: 'Untitled design (5)' },
   { src: img('2024/06/Untitled-design-5.png'), label: 'CompassMSP logo' },
   { src: img('2026/04/powersolution-logo-1-1.png'), label: 'powersolution-logo-1-1' },
+  { src: img('2023/09/MicroStrategy-Logo.png'), label: 'MicroStrategy Logo', fit: true },
   { src: img('2023/09/Untitled-design-6.png'), label: 'Untitled design (6)' },
   { src: img('2025/03/Katalyst-logo-1.png'), label: 'Katalyst logo' },
+  { src: img('2023/09/Relatient.png'), label: 'Relatient', fit: true },
   { src: img('2023/09/Untitled-design-3.png'), label: 'Untitled design (3)' },
   { src: img('2023/12/Data-Tech-Logo.png'), label: 'Data-Tech Logo' },
+  { src: img('2023/09/RoundTrip.png'), label: 'RoundTrip logo', fit: true },
   { src: img('2023/09/Untitled-design-7.png'), label: 'Untitled design (7)' },
+  { src: img('2023/09/TravelBank-Logo.jpg'), label: 'TravelBank Logo', fit: true },
   { src: img('2023/09/Untitled-design-4.png'), label: 'Untitled design (4)' },
+  { src: img('2023/09/Neuroflow.png'), label: 'Neuroflow', fit: true },
 ];
 
 const painPoints = [
-  "Don't know what really works for MSP marketing?",
+  "Don't know what really works for B2B tech marketing?",
   'Struggling to attract high-quality leads?',
   'Tired of spending on marketing but not seeing an ROI?',
   'Suffering from poor visibility on search engines?',
@@ -27,395 +31,46 @@ const painPoints = [
 
 const services = [
   [
-    { icon: 'fa-paper-plane', title: 'Done-For-You Cold Email', text: 'We write, send, and manage cold email campaigns for your MSP.' },
-    { icon: 'fa-globe', title: 'Websites especially for MSPs', text: 'Websites designed to address the unique needs and challenges of MSPs.' },
+    { icon: 'fa-paper-plane', title: 'Done-For-You Cold Email', text: 'We write, send, and manage cold email campaigns for your business.' },
+    { icon: 'fa-globe', title: 'Websites especially for B2B tech', text: 'Websites designed to address the unique needs and challenges of B2B tech companies.' },
     { icon: 'fa-bahai', title: 'AI platform visibility', text: 'Increase visibility on ChatGPT and other AI answer platforms' },
   ],
   [
     { icon: 'fa-map-marked-alt', title: 'Top search engine visibility', text: 'Boost organic traffic for industry-specific keywords that matter.' },
-    { icon: 'fa-pen-alt', title: 'Authority content creation', text: 'Produce expert content that positions your MSP as an industry leader.' },
+    { icon: 'fa-pen-alt', title: 'Authority content creation', text: 'Produce expert content that positions your company as an industry leader.' },
     { icon: 'fa-crown', title: 'Credibility from Inbound Links', text: "Elevate your site's authority by securing quality links from reputable sources." },
   ],
 ];
 
 const reasons = [
-  { lead: 'Proven Record with MSPs:', text: 'Our extensive track record with MSPs is backed by successful case studies.' },
+  { lead: 'Proven Record with B2B Tech:', text: 'Our extensive track record with MSPs and other B2B tech companies is backed by successful case studies.' },
   { lead: 'Transparent Reporting:', text: 'Gain complete insight with our custom reporting in text and video.' },
   { lead: 'Leading in AI and Tech:', text: 'We embrace cutting-edge tech for smarter, more effective campaigns.' },
 ];
 
-const videoTestimonials = [
-  { video: 'UfCuIEkhRQA', photo: img('2026/01/Peter-Jacobson.jpg'), w: 800, h: 800, alt: '', name: 'Peter Jacobson', role: 'Director of Business Development, Powersolution, MSP in New Jersey', quote: '“With RiseOak, we’ve secured numerous deals, most recently closing a mid-market manufacturer with three facilities across the US and Canada for a strong year-end.”' },
-  { video: 'igqloi5abEE', photo: img('2026/06/Chuck-Tomlinson.jpg'), w: 500, h: 500, alt: '', name: 'Chuck Tomlinson', role: 'Owner, SpectrumWise for 21 yrs', quote: '“Finally starting to get traction from the website, getting calls from the website, some really good appointments from the website. Just not have been getting that from any other SEO management company until I met RiseOak.”' },
-  { video: 'vtB-Mo9kJ0M', photo: img('2024/05/Untitled-design-7.png'), w: 500, h: 500, alt: 'David Ruchman', name: 'David Ruchman', role: 'CEO, Powersolution.com', quote: '“After working with RiseOak, the results have been phenomenal.”' },
-  { video: '-TulhvPpxv0', photo: img('2023/06/Dan-Blatt.jpg'), w: 500, h: 500, alt: 'Dan-Blatt', name: 'Dan Blatt', role: 'Manager Marketing & Business Development, Shipshape IT', quote: '“Working with RiseOak we were able to generate legitimate leads from the website and we started to see new clients who had found us from web searches in the DC metro area.“' },
-  { video: 'EofF0wmbakI', photo: img('2025/03/Sam-Martin.png'), w: 256, h: 278, alt: 'Sam-Martin', name: 'Sam Martin', role: 'COO Data-Tech', quote: '“I would 100% recommend any other organization to use RiseOak.“', photoWidth: '26.18%' },
-  { video: 'oV6-fjwetkE', photo: img('2026/08/1785244373027.png'), w: 800, h: 800, alt: '', name: 'Kaki Kleisch', role: 'VP Business Development, Katalyst', quote: '“If you are serious about improving your SEO strategy and building a long term foundation RiseOak is a great partner.”' },
-  { video: 'Pv3GiY29bOk', photo: img('2023/09/Philipp_Baumann_team.png'), w: 161, h: 161, alt: 'Philipp_Baumann, CEO BoomTech', name: 'Philip Baumann', role: 'CEO, BoomTech', quote: '“I would absolutely recommend RiseOak as it works. One marketing activity that we can actually see ROI”' },
-  { video: 'C_zb68Z-GSQ', photo: img('2023/06/Mike-sims-1.png'), w: 453, h: 496, alt: 'Mike-sims-1', name: 'Mike Sims', role: 'President, Resilient Managed Computer Services', quote: '“We had tried several SEO companies in the past with no results … With RiseOak things have improved drastically … Off our website we are now getting 4 to 6 good leads a month with a value from $500 to $10,000 per month.“' },
-];
-
-const cardTestimonials = [
-  { quote: '"We have closed some large deals based on leads coming from SEO. The majority of the Qualified inbound leads come from Google Search and SEO. Thanks, RiseOak for helping us with SEO"', photo: img('2023/06/Holly-Dowden.jpg'), alt: 'Holly-Dowden', name: 'Holly Dowden', job: 'VP, Marketing Ntiva' },
-  { quote: '"Working with RiseOak has been a very positive experience for my team. We were especially pleased with the quality of work and responsiveness. Already, in just a few short weeks, we are seeing a difference in our rankings. I highly recommend working with RiseOak."', photo: img('2023/06/Jonathan.jpeg'), alt: 'Marketing Director, TCG Network Services', name: 'Jonathan Browning', job: 'Marketing Director, TCG Network Services', tight: true },
-];
-
-const steps = [
-  { img: img('2023/11/1.png'), alt: '', title: 'Apply for consultation', text: 'Submit information for our initial evaluation.' },
-  { img: img('2023/11/2.png'), alt: '', title: 'Initial Consultation', text: 'An initial analysis and collection of more data.' },
-  { img: img('2023/11/3.png'), alt: 'number 3', title: 'Strategy session', text: 'Deep dive into your customized growth strategy.' },
-  { img: img('2023/11/4.png'), alt: '', title: 'Onboarding', text: 'Kickoff call and smooth transition.' },
-];
-
 const faqs = [
-  { q: 'Will this work for my MSP?', a: 'If you are an MSP that is just getting started, we can help you set up your online presence. However, our process is best suited for MSPs that are somewhat established, with a proven track record and already investing in different forms of marketing.' },
-  { q: 'How long does it take?', a: 'We have found that the more established your MSP is, the faster we can generate results for you. In most cases, we can show tangible results within the first two months.' },
+  { q: 'Will this work for my company?', a: 'If your company is just getting started, we can help you set up your online presence. However, our process is best suited for companies that are somewhat established, with a proven track record and already investing in different forms of marketing.' },
+  { q: 'How long does it take?', a: 'We have found that the more established your company is, the faster we can generate results for you. In most cases, we can show tangible results within the first two months.' },
   { q: 'Are there long term contracts?', a: 'No. We strongly believe that our ongoing relationship should be based on continuous results. All of our contracts are on a month-to-month basis.' },
-  { q: 'What is you process? What will you do?', a: 'We begin by ensuring that your web presence is optimized to attract and convert prospects. We have found that many MSPs we work with do not have this foundation in place. Next, we increase the authority of your web presence to attract and convert local prospects who are searching for Managed IT Services.' },
+  { q: 'What is you process? What will you do?', a: 'We begin by ensuring that your web presence is optimized to attract and convert prospects. We have found that many companies we work with do not have this foundation in place. Next, we increase the authority of your web presence to attract and convert prospects who are searching for your services.' },
 ];
-
-// "MSP Marketing Academy": the two newest posts, as on the live site.
-const posts = (await getSortedPosts()).slice(0, 2).map((p) => ({
-  href: `/${p.id}/`,
-  img: p.data.featuredImage,
-  alt: p.data.featuredImageAlt,
-  title: p.data.title,
-}));
 ---
-<Base
-  title="MSP Marketing Agency | RiseOak"
-  description="Seeking a marketing agency for your MSP? Dive into our expert digital marketing solutions tailored for MSPs."
->
-  <!-- 1. Hero -->
-  <section class="hero bg-white">
-    <div class="container">
-      <div class="col">
-        <div class="wrap center">
-          <div class="widget t-center">
-            <h1 class="title">MSP Digital Marketing Agency for Exponential Growth</h1>
-          </div>
-          <div class="widget t-center hero-sub">
-            <h2 class="title">Harness the Power of AI and Data-Driven Marketing</h2>
-          </div>
-          <div class="widget">
-            <div class="container hero-btns">
-              <div class="col c50">
-                <div class="wrap">
-                  <div class="widget align-right"><a class="btn btn-primary" href="/consultation/">Apply For Consultation</a></div>
-                </div>
-              </div>
-              <div class="col c50">
-                <div class="wrap center">
-                  <div class="widget align-left"><a class="btn btn-outline" href="/msp-ai-pilot/">Free AI Visibility Pilot</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. Client logos -->
-  <section class="logos bg-white">
-    <div class="container">
-      <div class="col">
-        <div class="wrap center">
-          <div class="widget t-center logos-heading"><h3 class="title">Some MSPs We've Helped</h3></div>
-          <div class="widget"><LogoCarousel slides={logos} /></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Pain points -->
-  <section class="pain bg-tint">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget t-center"><h2 class="title sec-h2">Frustrated with options to grow your MSP online?</h2></div>
-          <div class="widget">
-            <div class="container pain-list">
-              <div class="col">
-                <div class="wrap">
-                  <div class="widget">
-                    <ul class="icon-list">
-                      {painPoints.map((text) => (
-                        <li><span class="ico"><i class="fas fa-check-circle" aria-hidden="true"></i></span><span class="txt">{text}</span></li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. Services -->
-  <section class="services bg-white">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget t-center"><h2 class="title sec-h2">Leverage our specialized digital marketing solutions to drive revenue</h2></div>
-          <div class="widget">
-            {services.map((row) => (
-              <div class="container row">
-                {row.map((s) => (
-                  <div class="col c33">
-                    <div class="wrap service-card">
-                      <div class="widget icon-box">
-                        <div class="ib-icon"><i class={`fas ${s.icon}`} aria-hidden="true"></i></div>
-                        <div class="ib-content">
-                          <h3>{s.title}</h3>
-                          <p>{s.text}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. Reasons -->
-  <section class="reasons bg-tint">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget t-center"><h2 class="title sec-h2">Reasons We're Your Best Choice</h2></div>
-          <div class="widget">
-            <div class="container reasons-list">
-              <div class="col">
-                <div class="wrap">
-                  <div class="widget">
-                    <ul class="icon-list">
-                      {reasons.map((r) => (
-                        <li><span class="ico"><i class="fas fa-check-circle" aria-hidden="true"></i></span><span class="txt"><strong>{r.lead}</strong> {r.text}</span></li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. AI visibility CTA -->
-  <section class="ai-cta bg-white">
-    <div class="container">
-      <div class="col">
-        <div class="wrap center">
-          <div class="widget t-center"><h2 class="title sec-h2">Get Ahead While Most MSPs Are Still Watching</h2></div>
-          <div class="widget t-center"><a class="btn btn-outline" href="/msp-ai-visibility-roadmap/">Free AI Visibility Pilot</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Results heading + video testimonials -->
-  <section class="results-head bg-tint">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget t-center"><h2 class="title sec-h2">Results, Not Hype: We've Supported MSPs Like You</h2></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {videoTestimonials.map((t) => (
-    <section class="vt bg-tint">
-      <div class="container">
-        <div class="col c50">
-          <div class="wrap">
-            <div class="widget video">
-              <iframe
-                src={`https://www.youtube.com/embed/${t.video}?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0&enablejsapi=1`}
-                title={`${t.name} testimonial`}
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-        </div>
-        <div class="col c50">
-          <div class="wrap">
-            <div class="widget">
-              <div class="container">
-                <div class="col vt-photo" style={t.photoWidth ? `width:${t.photoWidth}` : undefined}>
-                  <div class="wrap">
-                    <div class="widget"><img src={t.photo} alt={t.alt} width={t.w} height={t.h} loading="lazy" /></div>
-                  </div>
-                </div>
-                <div class="col vt-text">
-                  <div class="wrap">
-                    <div class="widget vt-quote"><p>{t.quote}</p></div>
-                    <div class="widget vt-name"><h3 class="title">{t.name}</h3></div>
-                    <div class="widget vt-role"><p>{t.role}</p></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  ))}
-
-  <!-- 8. Card testimonials -->
-  <section class="cards bg-tint">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget">
-            <div class="container cards-row">
-              {cardTestimonials.map((t) => (
-                <div class="col c50">
-                  <div class="wrap t-card">
-                    <div class="widget testimonial">
-                      <div class="testimonial-content">{t.quote}</div>
-                      <div class="testimonial-meta">
-                        <div class="testimonial-image"><img src={t.photo} alt={t.alt} width="55" height="55" loading="lazy" /></div>
-                        <div class="testimonial-details">
-                          <div class="testimonial-name">{t.name}</div>
-                          <div class:list={['testimonial-job', { tight: t.tight }]}>{t.job}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9. Steps -->
-  <section class="steps bg-white">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget t-center"><h2 class="title sec-h2">Get Started in 4 Steps</h2></div>
-          <div class="widget">
-            <div class="container">
-              {steps.map((s, i) => (
-                <div class="col c25">
-                  <div class:list={['wrap step', { 'step-1': i === 0 }]}>
-                    <div class="widget image-box">
-                      <figure class="ib-img" style="margin-block:0;margin-inline:auto"><img src={s.img} alt={s.alt} width="100" height="100" loading="lazy" /></figure>
-                      <div class="ib-content">
-                        <h3>{s.title}</h3>
-                        <p>{s.text}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. Final CTA -->
-  <section class="final-cta bg-white">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget t-center"><h2 class="title sec-h2">Ready to elevate your MSP with proven<br /> Digital Marketing Strategies?</h2></div>
-          <div class="widget t-center btn-wrap"><a class="btn btn-primary" href="/consultation/">Apply For Consultation</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 11. FAQs -->
-  <section class="faq bg-tint">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget t-center"><h2 class="title sec-h2">FAQs</h2></div>
-          <div class="widget">
-            <div class="container faq-inner">
-              <div class="col">
-                <div class="wrap">
-                  <div class="widget accordion">
-                    {faqs.map((f, i) => (
-                      <div class:list={['acc-item', { active: i === 0 }]}>
-                        <button class="acc-title" type="button" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`faq-${i}`} id={`faq-title-${i}`}>
-                          <span class="acc-icon" aria-hidden="true"><i class="fas fa-caret-right closed"></i><i class="fas fa-caret-down opened"></i></span>
-                          {f.q}
-                        </button>
-                        <div class="acc-content" id={`faq-${i}`} role="region" aria-labelledby={`faq-title-${i}`}><p>{f.a}</p></div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 12. MSP Marketing Academy -->
-  <section class="academy bg-white">
-    <div class="container">
-      <div class="col">
-        <div class="wrap">
-          <div class="widget t-center academy-head"><h2 class="title">MSP Marketing Academy</h2></div>
-          <div class="widget">
-            <div class="posts">
-              {posts.map((p) => (
-                <article class="post">
-                  <a class="post-thumb-link" href={p.href} tabindex="-1">
-                    <div class="post-thumb"><img src={p.img} alt={p.alt} width="750" height="500" loading="lazy" /></div>
-                  </a>
-                  <div class="post-text">
-                    <h3 class="post-title"><a href={p.href}>{p.title}</a></h3>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-          <div class="widget t-center explore"><h3 class="title"><a href="/blog/">Explore All</a></h3></div>
-        </div>
-      </div>
-    </div>
-  </section>
-</Base>
-
-<script>
-  // Elementor accordion: one panel open at a time, clicking the open one closes it.
-  document.querySelectorAll<HTMLElement>('.accordion').forEach((acc) => {
-    acc.querySelectorAll<HTMLButtonElement>('.acc-title').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.acc-item')!;
-        const wasOpen = item.classList.contains('active');
-        acc.querySelectorAll('.acc-item').forEach((el) => {
-          el.classList.remove('active');
-          el.querySelector('.acc-title')!.setAttribute('aria-expanded', 'false');
-        });
-        if (!wasOpen) {
-          item.classList.add('active');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  });
-</script>
+<LandingPage
+  title="B2B Tech Marketing Agency | RiseOak"
+  description="Seeking a marketing agency for your B2B tech company? Dive into our expert digital marketing solutions tailored for B2B tech companies."
+  h1="Digital Marketing Agency for B2B Tech Companies"
+  industryLinks
+  logosHeading="Some Companies We've Helped"
+  logos={logos}
+  painHeading="Frustrated with options to grow your tech company online?"
+  painPoints={painPoints}
+  services={services}
+  reasons={reasons}
+  aiCtaHeading="Get Ahead While Most Tech Companies Are Still Watching"
+  resultsHeading="Results, Not Hype: We've Supported Companies Like Yours"
+  videoTestimonials={videoTestimonials}
+  cardTestimonials={cardTestimonials}
+  ctaSubject="tech company"
+  faqs={faqs}
+  academyHeading="B2B Tech Marketing Academy"
+/>

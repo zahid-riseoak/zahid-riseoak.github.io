@@ -1,8 +1,9 @@
 ---
 // Elementor media-carousel 7a35c65: loop, 1 slide per step, 500ms, arrows + bullets.
-// Slides per view / gap: desktop 4 / 50px, tablet 2 / 10px, mobile 1 / 10px.
+// Slides per view / gap: desktop 4 / 50px, tablet 2 / 10px, mobile 2 / 10px.
 interface Props {
-  slides: { src: string; label: string }[];
+  /** fit: show the whole image, for wide logos that background-size: cover would crop. */
+  slides: { src: string; label: string; fit?: boolean }[];
 }
 const { slides } = Astro.props;
 ---
@@ -11,7 +12,7 @@ const { slides } = Astro.props;
     <div class="carousel-track">
       {slides.map((s) => (
         <div class="carousel-slide" role="group" aria-roledescription="slide">
-          <div class="carousel-img" role="img" aria-label={s.label} style={`background-image:url('${s.src}')`}></div>
+          <div class="carousel-img" role="img" aria-label={s.label} style={`background-image:url('${s.src}')${s.fit ? ';background-size:contain' : ''}`}></div>
         </div>
       ))}
     </div>
@@ -52,7 +53,7 @@ const { slides } = Astro.props;
 
     const layout = () => {
       const w = window.innerWidth;
-      perView = w <= 767 ? 1 : w <= 1024 ? 2 : 4;
+      perView = w <= 1024 ? 2 : 4;
       gap = w <= 1024 ? 10 : 50;
       const slideW = (viewport.clientWidth - gap * (perView - 1)) / perView;
       step = slideW + gap;
@@ -81,7 +82,8 @@ const { slides } = Astro.props;
 
     root.querySelector('.carousel-prev')!.addEventListener('click', () => go(index - 1));
     root.querySelector('.carousel-next')!.addEventListener('click', () => go(index + 1));
-    window.addEventListener('resize', layout);
+    // Observes the slider itself so slide sizes follow any layout change, not just window resizes.
+    new ResizeObserver(layout).observe(viewport);
     layout();
   });
 </script>

@@ -306,7 +306,7 @@ h2.elementor-heading-title { line-height: 50px; }
 .legal-body { padding: 15px 0 0; }
 .legal-body > .container { max-width: 1046px; }
 .privacy-body { padding: 25px 0; }
-.legal-body .rich, .privacy-body .rich { font-size: 23px; }
+.legal-body .rich, .privacy-body .rich { font-size: 23px; overflow-wrap: anywhere; }
 
 /* ---------- Case studies ---------- */
 .cs-hero { background-color: #030303; background-repeat: no-repeat; background-size: cover; }

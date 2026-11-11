@@ -1,6 +1,11 @@
 ---
 // "Get Started in 4 Steps" block for the MSP and SaaS landing pages.
 import { steps } from '../data/landing';
+
+interface Props {
+  ctaHref?: string;
+}
+const { ctaHref = '/consultation/' } = Astro.props;
 ---
 <section class="ml-sec steps">
   <div class="ml-wrap">
@@ -20,5 +25,6 @@ import { steps } from '../data/landing';
         </div>
       ))}
     </div>
+    <div class="ml-steps-cta"><a class="btn btn-primary" href={ctaHref}>Apply For Consultation</a></div>
   </div>
 </section>

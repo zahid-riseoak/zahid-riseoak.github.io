@@ -114,6 +114,8 @@
 .ml-faq-boxed .acc-content { padding-top: 0; }
 
 /* CTA band */
+.ml-steps-cta { margin-top: 30px; text-align: center; }
+#apply { scroll-margin-top: 100px; }
 .ml-band { padding: 70px 0; text-align: center; color: #fff; background: #070949; }
 .ml-band h2 { margin: 0 0 28px; font-size: 38px; font-weight: 600; line-height: 1.25; color: #fff; }
 

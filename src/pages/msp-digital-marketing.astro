@@ -28,23 +28,9 @@ const services = [
 ];
 
 const reasons = [
-  { lead: 'Proven Record with MSPs', text: 'Our extensive track record with MSPs is backed by successful case studies.', img: '/images/2026/03/Powersolution-msp-ranking-in-top-10.jpg', alt: 'Powersolution rankings in the top 10 for New Jersey MSP keywords' },
-  { lead: 'Transparent Reporting', text: 'Gain complete insight with our custom reporting in text and video.', img: '/images/2024/10/Organic-Ranking-Improvements-3-1.jpg', alt: 'Search performance report showing a gradual ranking increase' },
-  { lead: 'Leading in AI and Tech', text: 'We embrace cutting-edge tech for smarter, more effective campaigns.', img: '/images/2026/09/MSP-Content-That-AI-Engines-Cite-img-1.jpg', alt: 'Hands on a laptop with an AI graphic' },
-];
-
-// Figures come from the Powersolution, Ntiva and TCG case studies.
-const impacts = [
-  { name: 'Powersolution', points: ['10x increase in website traffic', 'From under 100 to about 1,000 visitors per day', 'Numerous new contracts signed'] },
-  { name: 'Ntiva', points: ['About 14 sales qualified leads a month from the DC area', '2 to 3 new clients per month', 'About 45% of new business from marketing'] },
-  { name: 'TCG Network Services', points: ['Massive ranking increases within one month', 'Some keywords moved up 50 to 60 positions', 'Now working with us on a long-term basis'] },
-];
-
-// Figures come from the About page.
-const stats = [
-  { value: '10+', label: 'Years of Results With Top MSPs' },
-  { value: '20+', label: 'Years of Digital Marketing Experience' },
-  { value: '4', label: 'US Patents' },
+  { lead: 'Proven Record with MSPs:', text: 'Our extensive track record with MSPs is backed by successful case studies.' },
+  { lead: 'Transparent Reporting:', text: 'Gain complete insight with our custom reporting in text and video.' },
+  { lead: 'Leading in AI and Tech:', text: 'We embrace cutting-edge tech for smarter, more effective campaigns.' },
 ];
 
 const cases = [
@@ -70,7 +56,7 @@ const faqs = [
         <p>Harness the Power of AI and Data-Driven Marketing</p>
         <a class="btn btn-outline" href="/msp-ai-pilot/">Free AI Visibility Pilot</a>
       </div>
-      <div class="ml-form-card e-form">
+      <div class="ml-form-card e-form" id="apply">
         <h2>Apply For Consultation</h2>
         <LeadForm name="msp-landing-top" submitLabel="Apply For Consultation" />
       </div>
@@ -110,18 +96,28 @@ const faqs = [
     </div>
   </section>
 
-  <section class="ml-sec ml-reasons">
-    <div class="ml-wrap">
-      <h2 class="ml-h2">Reasons We're Your Best Choice</h2>
-      {reasons.map((r) => (
-        <div class="ml-row">
-          <div class="ml-row-text">
-            <h3>{r.lead}</h3>
-            <p>{r.text}</p>
+  <section class="reasons bg-tint">
+    <div class="container">
+      <div class="col">
+        <div class="wrap">
+          <div class="widget t-center"><h2 class="title sec-h2">Reasons We're Your Best Choice</h2></div>
+          <div class="widget">
+            <div class="container reasons-list">
+              <div class="col">
+                <div class="wrap">
+                  <div class="widget">
+                    <ul class="icon-list">
+                      {reasons.map((r) => (
+                        <li><span class="ico"><i class="fas fa-check-circle" aria-hidden="true"></i></span><span class="txt"><strong>{r.lead}</strong> {r.text}</span></li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="ml-row-img"><img src={r.img} alt={r.alt} width="750" height="500" loading="lazy" /></div>
         </div>
-      ))}
+      </div>
     </div>
   </section>
 
@@ -129,28 +125,7 @@ const faqs = [
 
   <SalesCaseStudies cases={cases} />
 
-  <section class="ml-sec ml-impact">
-    <div class="ml-wrap">
-      <h2 class="ml-h2">What Our Work Has Delivered</h2>
-      <div class="ml-impact-grid">
-        {impacts.map((c) => (
-          <div>
-            <h3>{c.name}</h3>
-            <ul>
-              {c.points.map((p) => <li><i class="fas fa-chart-line" aria-hidden="true"></i><span>{p}</span></li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div class="ml-stats">
-        {stats.map((s) => (
-          <div class="ml-stat"><strong>{s.value}</strong><span>{s.label}</span></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <SalesSteps />
+  <SalesSteps ctaHref="#apply" />
 
   <section class="ml-band">
     <div class="ml-wrap">
@@ -163,15 +138,6 @@ const faqs = [
     <div class="ml-wrap ml-narrow">
       <h2 class="ml-h2">FAQs</h2>
       <FaqAccordion faqs={faqs} />
-    </div>
-  </section>
-
-  <section class="ml-sec ml-final">
-    <div class="ml-wrap">
-      <h2 class="ml-h2">Ready to elevate your MSP with proven<br /> Digital Marketing Strategies?</h2>
-      <div class="ml-form-card e-form">
-        <LeadForm name="msp-landing-bottom" submitLabel="Apply For Consultation" />
-      </div>
     </div>
   </section>
 </Base>

@@ -10,10 +10,8 @@ interface Props {
     /** Set for a client logo; leave out for a thumbnail that fills the card. */
     logoAlt?: string;
   }[];
-  /** White button with blue text and outline instead of the solid blue one. */
-  outlineButton?: boolean;
 }
-const { cases, outlineButton = false } = Astro.props;
+const { cases } = Astro.props;
 ---
 <section class="ml-sec ml-cases">
   <div class="ml-wrap">
@@ -25,7 +23,7 @@ const { cases, outlineButton = false } = Astro.props;
             <img src={c.img} alt={c.logoAlt ?? ''} width={c.w} height={c.h} loading="lazy" />
           </a>
           <h3>{c.title}</h3>
-          <a class:list={['btn', outlineButton ? 'btn-outline' : 'btn-primary']} href={c.href}>Read Case Study</a>
+          <a class="btn btn-outline" href={c.href}>Read Case Study</a>
         </article>
       ))}
     </div>
